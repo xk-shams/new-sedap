@@ -58,7 +58,8 @@ export default function Orders() {
             <div className={styles.leftDiv}>
               <div className={styles.leftTop}>
                 <div className={styles.forAvatar}></div>
-                <h2>Wahyu Adi Kurniawan</h2>
+                <h2>{orders.userName}</h2>
+                <p className={styles.type}>{orders.type}</p>
                 <div className={styles.noteOrder}>
                   <h3>Note Order</h3>
                   <p>
@@ -80,13 +81,36 @@ export default function Orders() {
                   </div>
                 </div>
               </div>
-              <div className={styles.leftBottom}></div>
+              <div className={styles.leftBottom}>
+                <Image
+                  src="/detailBottomLeft.png"
+                  width={211}
+                  height={366}
+                  alt="img"
+                />
+              </div>
             </div>
             <div className={styles.rightDiv}>
               <div className={styles.rightTop}>
                 <CustomizedTables data={orders.orders} />
               </div>
-              <div className={styles.rightBottom}></div>
+              <div className={styles.rightBottom}>
+                <Image
+                  src="/map.png"
+                  width={1030}
+                  height={349}
+                  alt="img"
+                  style={{
+                    marginBottom: "43px",
+                  }}
+                />
+                <Image
+                  src="/courirInfo.png"
+                  width={1030}
+                  height={144}
+                  alt="img"
+                />
+              </div>
             </div>
           </div>
         </div>

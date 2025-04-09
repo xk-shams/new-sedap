@@ -12,6 +12,9 @@
 }
 
 .leftBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 339px;
   height: 471px;
   background-color: white;
@@ -20,6 +23,11 @@
 }
 
 .rightBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
   width: 1089px;
   height: 599px;
   background-color: white;
@@ -62,7 +70,7 @@
   font-weight: 600;
   font-size: 18px;
   color: #3e4954;
-  margin-bottom: 70px;
+  margin-bottom: 10px;
 }
 
 .noteOrder {
@@ -119,4 +127,15 @@
 
 .css-1mauqrt-MuiTableCell-root.MuiTableCell-head {
   background-color: #00b074 !important;
+}
+
+.type {
+  padding: 8px 22px;
+  background-color: #00b07426;
+  font-weight: 600;
+  color: #00b074;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom: 30px;
 }

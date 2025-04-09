@@ -15,7 +15,7 @@ function Navigation(props) {
       id: 1,
       linkName: "Dashboard",
       linkImg: "/home.png",
-      href: "/",
+      href: "/dashboard",
       active: true,
     },
     {
@@ -151,14 +151,18 @@ function Navigation(props) {
 function Links(props) {
   const { linkName, linkImg, href, active } = props;
   const router = useRouter();
+
+  // Agar href /orders bilan boshlasa, u faollashsin, ammo faqat /orders uchun emas
+  const isActive = router.asPath.startsWith(href) && router.asPath !== "/";
+
   return (
     <>
       <Link
-        className={`${router.asPath === href ? styles.active : ""}`}
+        className={`${isActive ? styles.active : ""}`}
         href={href}
         style={{
-          background: router.asPath === href ? "#00B07426" : "",
-          color: router.asPath === href ? "#177556" : "",
+          background: isActive ? "#00B07426" : "",
+          color: isActive ? "#177556" : "",
         }}
       >
         <Image src={linkImg} alt={linkName} width={20} height={20} />

@@ -63,14 +63,13 @@ function TableHead({ name }) {
 function TableRow(props) {
   const { item } = props;
   const router = useRouter();
-
   function goToDetails(orderId) {
     orderListData.map((item) => {
       if (item.userId == orderId) {
         localStorage.setItem("orders", JSON.stringify(item));
       }
     });
-    router.push("/order-detail");
+    router.push(`/orders/order-detail`);
   }
 
   return (
