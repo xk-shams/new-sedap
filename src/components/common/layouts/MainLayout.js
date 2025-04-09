@@ -10,8 +10,11 @@ function MainLayout(props) {
     <main
       style={{
         display: "flex",
+        maxWidth: "1920px",
+        width: "100%",
+        margin: "0 auto",
         minHeight: "100vh",
-        minWidth: "100vw",
+        // minWidth: "100vw",
       }}
     >
       <div style={{ display: "flex", minWidth: "100wh" }}>

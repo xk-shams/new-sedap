@@ -1,5 +1,5 @@
 import { useParams } from "next/navigation";
-import orderListData from "../../../components/pages/orders/Data";
+import orderListData from "@/data";
 function OrderDetail() {
   const route = useParams();
   const currentOrder = orderListData.find((item) => {
