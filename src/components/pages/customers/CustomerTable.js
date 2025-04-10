@@ -59,12 +59,12 @@ function TableMap() {
     <>
       {CustomerData.map((item) => (
         <tr
-          key={item.userId}
+          key={item.id}
           className={styles["tr2"]}
           style={{ cursor: "pointer" }}
-          onClick={() => goToDetails(item.userId)}
+          onClick={() => goToDetails(item.id)}
         >
-          <td className={styles["td"]}>#C-{item.userId}</td>
+          <td className={styles["td"]}>#C-{item.id}</td>
           <td className={styles["td"]}>{item.date}</td>
           <td className={styles["td"]}>{item.userName}</td>
           <td className={styles["td"]}>{item.location}</td>

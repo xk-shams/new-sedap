@@ -3,7 +3,7 @@ import styles from "@/styles/order.module.css";
 import orderListData from "@/data";
 import { useRouter } from "next/router";
 
-export default function OrderTable() {
+export default function () {
   const columns = [
     {
       id: "0",
@@ -43,7 +43,7 @@ export default function OrderTable() {
       <tbody>
         <tr className={styles.forSpace}></tr>
         {orderListData.map((item) => (
-          <TableRow key={item.userId} item={item} />
+          <TableRow key={item.id} item={item} />
         ))}
       </tbody>
     </table>
@@ -65,20 +65,20 @@ function TableRow(props) {
   const router = useRouter();
   function goToDetails(orderId) {
     orderListData.map((item) => {
-      if (item.userId == orderId) {
+      if (item.id == orderId) {
         localStorage.setItem("orders", JSON.stringify(item));
       }
     });
-    router.push(`/orders/${item.userId}`);
+    router.push(`/orders/${item.id}`);
   }
 
   return (
     <tr
       className={styles["tr"]}
       style={{ cursor: "pointer" }}
-      onClick={() => goToDetails(item.userId)}
+      onClick={() => goToDetails(item.id)}
     >
-      <td className={styles["td"]}>#{item.userId}</td>
+      <td className={styles["td"]}>#{item.id}</td>
       <td className={styles["td"]}>{item.date}</td>
       <td className={styles["td"]}>{item.userName}</td>
       <td className={styles["td"]}>{item.location}</td>

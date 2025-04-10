@@ -45,7 +45,7 @@ export default function Orders() {
               <PageTitle
                 title="Order ID # "
                 subtitle="Orders / Order Detaills"
-                id={orders.userId}
+                id={orders.id}
               />
               <div>
                 <button className={styles.cancelBtn}>Cancel Order</button>

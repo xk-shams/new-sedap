@@ -1,13 +1,13 @@
 export const orderListData = [
   {
-    userId: 765231,
+    id: "765231",
     date: "26 March 2020, 12:42 AM",
     userName: "Mikasa Ackerman",
     location: "Corner Street 5th London",
     amount: 164.52,
     status: "New Order",
     type: "admin",
-    orders: [
+    items: [
       {
         name: "Watermelon juice with ice",
         count: 5,
@@ -25,14 +25,14 @@ export const orderListData = [
     ],
   },
   {
-    userId: 135231,
+    id: "135231",
     date: "26 March 2020, 12:42 AM",
     userName: "Eren Yeager",
     location: "Corner Street 5th London",
     amount: 164.52,
     status: "On Delivery",
     type: "customer",
-    orders: [
+    items: [
       {
         name: "Watermelon juice with ice",
         count: 5,
@@ -43,14 +43,14 @@ export const orderListData = [
     ],
   },
   {
-    userId: 325231,
+    id: "325231",
     date: "26 March 2020, 12:42 AM",
     userName: "Levi Ackerman",
     location: "Corner Street 5th London",
     amount: 164.52,
     type: "customer",
     status: "Delivered",
-    orders: [
+    items: [
       {
         name: "Watermelon juice with ice",
         count: 5,
@@ -61,7 +61,7 @@ export const orderListData = [
     ],
   },
   {
-    userId: 555231,
+    id: "555231",
     date: "26 March 2020, 12:42 AM",
     userName: "Armin Melaney",
     location: "Corner Street 5th London",
@@ -70,14 +70,14 @@ export const orderListData = [
     status: "New Order",
   },
   {
-    userId: 523231,
+    id: "523231",
     date: "26 March 2020, 12:42 AM",
     userName: "Grisha Yeager",
     type: "customer",
     location: "Corner Street 5th London",
     amount: 164.52,
     status: "On Delivery",
-    orders: [
+    items: [
       {
         name: "Watermelon juice with ice",
         count: 5,
@@ -88,13 +88,13 @@ export const orderListData = [
     ],
   },
   {
-    userId: 558831,
+    id: "558831",
     date: "26 March 2020, 12:42 AM",
     userName: "Historia Reuss",
     location: "Corner Street 5th London",
     amount: 164.52,
     type: "customer",
-    orders: [
+    items: [
       {
         name: "Watermelon juice with ice",
         count: 5,
