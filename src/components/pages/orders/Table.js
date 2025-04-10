@@ -3,7 +3,7 @@ import styles from "@/styles/order.module.css";
 import orderListData from "@/data";
 import { useRouter } from "next/router";
 
-export default function Table() {
+export default function OrderTable() {
   const columns = [
     {
       id: "0",

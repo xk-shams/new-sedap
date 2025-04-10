@@ -15,7 +15,6 @@ export default function Orders() {
     }
   }, []);
 
-  console.log(orders);
   return (
     <>
       <Head>

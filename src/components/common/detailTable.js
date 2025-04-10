@@ -34,7 +34,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables(props) {
   const { data } = props;
-  console.log(data);
   return (
     <TableContainer
       component={Paper}
@@ -131,7 +130,6 @@ export default function CustomizedTables(props) {
                       >
                         ({row.review} review)
                       </p>
-                      {console.log(row.review)}
                     </div>
                   </div>
                 </div>
