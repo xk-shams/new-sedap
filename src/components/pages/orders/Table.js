@@ -69,7 +69,7 @@ function TableRow(props) {
         localStorage.setItem("orders", JSON.stringify(item));
       }
     });
-    router.push(`/orders/order-detail`);
+    router.push(`/orders/${item.userId}`);
   }
 
   return (

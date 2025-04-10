@@ -12,7 +12,7 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <Image src="/dashboard.png" width={1473} height={1544} alt="back" />
+        <Image src="/dashboard.png" width={1460} height={1544} alt="back" />
       </div>
     </>
   );

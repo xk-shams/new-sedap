@@ -152,7 +152,6 @@ function Links(props) {
   const { linkName, linkImg, href, active } = props;
   const router = useRouter();
 
-  // Agar href /orders bilan boshlasa, u faollashsin, ammo faqat /orders uchun emas
   const isActive = router.asPath.startsWith(href) && router.asPath !== "/";
 
   return (
