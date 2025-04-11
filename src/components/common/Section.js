@@ -4,7 +4,7 @@ import Link from "next/link";
 import Status from "./Status";
 import Calendar from "./Calendar";
 import styles from "@/styles/order.module.css";
-import Table from "../pages/orders/Table";
+import Table from "../pages/orders/OrdersTable";
 
 export default function Section() {
   return (

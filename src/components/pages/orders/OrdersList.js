@@ -1,6 +1,6 @@
 import React from "react";
 import PageTitle from "@/components/common/PageTitle";
-import OrderTable from "./Table";
+import OrderTable from "./OrdersTable";
 import Calendar from "@/components/common/Calendar";
 import Status from "@/components/common/Status";
 import styles from "@/styles/order.module.css";

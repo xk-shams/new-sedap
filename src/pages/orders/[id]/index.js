@@ -1,5 +1,5 @@
 import { useParams } from "next/navigation";
-import orderListData from "@/data";
+import { orderListData } from "@/data";
 import Head from "next/head";
 import PageTitle from "@/components/common/PageTitle";
 import styles from "@/styles/orderDetail.module.css";
@@ -7,9 +7,12 @@ import MainLayout from "@/components/common/layouts/MainLayout";
 import Image from "next/image";
 import CustomizedTables from "@/components/common/detailTable";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function OrderDetail() {
   const route = useParams();
+  const router = useRouter();
+
   const currentOrder = orderListData.find((item) => {
     if (item.id === parseInt(route?.id)) {
       return true;
@@ -53,11 +56,17 @@ function OrderDetail() {
             >
               <PageTitle
                 title="Order ID # "
-                subtitle="Orders / Order Detaills"
+                subtitle=" / Order Detaills"
+                back="order"
                 id={orders.id}
               />
               <div>
-                <button className={styles.cancelBtn}>Cancel Order</button>
+                <button
+                  className={styles.cancelBtn}
+                  onClick={() => router.back()}
+                >
+                  Cancel Order
+                </button>
                 <button className={styles.onDelivery}>On Delivery</button>
               </div>
             </div>

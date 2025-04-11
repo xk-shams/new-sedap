@@ -1,77 +1,92 @@
 import React from "react";
 import styles from "@/styles/customers.module.css";
-import CustomerData from "./CustomerData";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { customerListData } from "@/data";
+import { useRouter } from "next/router";
 
 export default function CustomerTable() {
+  const columns = [
+    {
+      id: "0",
+      name: "Customer ID",
+    },
+    {
+      id: "1",
+      name: "Join Date",
+    },
+    {
+      id: "2",
+      name: "Customer Name",
+    },
+    {
+      id: "3",
+      name: "Location",
+    },
+    {
+      id: "4",
+      name: "Total Spent",
+    },
+    {
+      id: "5",
+      name: "Last Order",
+    },
+  ];
+
   return (
-    <>
-      <table className={styles["table"]}>
-        <thead>
-          <tr className={styles["tr"]}>
-            <th className={styles["th"]}>
-              <div>
-                <p>Customer ID</p>
-              </div>
-            </th>
-            <th className={styles["th"]}>
-              <div>
-                <p>Join Date</p>
-              </div>
-            </th>
-            <th className={styles["th"]}>
-              <div>
-                <p>Customer Name</p>
-              </div>
-            </th>
-            <th className={styles["th"]}>
-              <div>
-                <p>Location</p>
-              </div>
-            </th>
-            <th className={styles["th"]}>
-              <div>
-                <p>Total Spent</p>
-              </div>
-            </th>
-            <th className={styles["th"]}>
-              <div>
-                <p>Last Order</p>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <TableMap />
-        </tbody>
-      </table>
-    </>
+    <table className={styles["orderTable"]}>
+      <thead>
+        <tr className={styles["tr"]}>
+          {columns.map((col) => (
+            <TableHead key={col.id} name={col.name} />
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr style={{ height: "40px" }}></tr>
+        {customerListData.map((item) => (
+          <TableRow key={item.userId} item={item} />
+        ))}
+      </tbody>
+    </table>
   );
 }
 
-function TableMap() {
-  const route = useRouter();
-  const goToDetails = (id) => {
-    route.push(`/${id}`);
-  };
+function TableHead({ name }) {
   return (
-    <>
-      {CustomerData.map((item) => (
-        <tr
-          key={item.id}
-          className={styles["tr2"]}
-          style={{ cursor: "pointer" }}
-          onClick={() => goToDetails(item.id)}
-        >
-          <td className={styles["td"]}>#C-{item.id}</td>
-          <td className={styles["td"]}>{item.date}</td>
-          <td className={styles["td"]}>{item.userName}</td>
-          <td className={styles["td"]}>{item.location}</td>
-          <td className={styles["td1"]}>${item.amount}</td>
-          <td className={styles["td12"]}>${item.lastAmount}</td>
-        </tr>
-      ))}
-    </>
+    <th className={styles["th"]}>
+      <div>
+        <p>{name}</p>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin: "10px",
+          }}
+        ></div>
+      </div>
+    </th>
+  );
+}
+
+function TableRow(props) {
+  const { item } = props;
+  const router = useRouter();
+
+  const goToDetails = (itemId) => {
+    router.push(`/customers/${itemId}`);
+  };
+
+  return (
+    <tr
+      className={styles["hoverTr"]}
+      style={{ cursor: "pointer" }}
+      onClick={() => goToDetails(item.customerId)}
+    >
+      <td className={styles["td"]}>#{item.customerId}</td>
+      <td className={styles["td"]}>{item.date}</td>
+      <td className={styles["td"]}>{item.customerName}</td>
+      <td className={styles["td"]}>{item.location}</td>
+      <td className={styles["td"]}>${item.spent}</td>
+      <td className={styles["td"]}>${item.lastOrder}</td>
+    </tr>
   );
 }

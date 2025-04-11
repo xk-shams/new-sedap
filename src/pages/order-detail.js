@@ -7,13 +7,13 @@ import CustomizedTables from "@/components/common/detailTable";
 import { useEffect, useState } from "react";
 
 export default function Orders() {
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    const savedOrders = localStorage.getItem("orders");
-    if (savedOrders) {
-      setOrders(JSON.parse(savedOrders));
-    }
-  }, []);
+  // const [orders, setOrders] = useState([]);
+  // useEffect(() => {
+  //   const savedOrders = localStorage.getItem("orders");
+  //   if (savedOrders) {
+  //     setOrders(JSON.parse(savedOrders));
+  //   }
+  // }, []);
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function Orders() {
               <PageTitle
                 title="Order ID # "
                 subtitle="Orders / Order Detaills"
-                id={orders.id}
+                // id={orders.id}
               />
               <div>
                 <button className={styles.cancelBtn}>Cancel Order</button>
@@ -57,8 +57,8 @@ export default function Orders() {
             <div className={styles.leftDiv}>
               <div className={styles.leftTop}>
                 <div className={styles.forAvatar}></div>
-                <h2>{orders.userName}</h2>
-                <p className={styles.type}>{orders.type}</p>
+                {/* <h2>{orders.userName}</h2> */}
+                {/* <p className={styles.type}>{orders.type}</p> */}
                 <div className={styles.noteOrder}>
                   <h3>Note Order</h3>
                   <p>
@@ -91,7 +91,7 @@ export default function Orders() {
             </div>
             <div className={styles.rightDiv}>
               <div className={styles.rightTop}>
-                <CustomizedTables data={orders.orders} />
+                {/* <CustomizedTables data={orders.orders} /> */}
               </div>
               <div className={styles.rightBottom}>
                 <Image
