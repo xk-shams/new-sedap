@@ -45,6 +45,11 @@
   background-color: #00b074;
   color: white;
 }
+
+.orderTable tbody {
+  background-color: white;
+}
+
 .orderTable .tr th {
   padding: 24px 0;
   text-align: left;
@@ -54,6 +59,18 @@
   padding-left: 70px;
 }
 .orderTable .tr td {
+  padding: 12px 0;
+}
+
+.orderTable .hoverTr th {
+  padding: 24px 0;
+  text-align: left;
+}
+.orderTable .hoverTr th:first-child,
+.orderTable .hoverTr td:first-child {
+  padding-left: 70px;
+}
+.orderTable .hoverTr td {
   padding: 12px 0;
 }
 
@@ -99,4 +116,8 @@
 
 .forSpace {
   height: 40px;
+}
+
+.hoverTr:hover {
+  background-color: #f3f2f7;
 }

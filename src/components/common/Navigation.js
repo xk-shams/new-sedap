@@ -15,90 +15,77 @@ function Navigation(props) {
       linkName: "Dashboard",
       linkImg: "/home.png",
       href: "/dashboard",
-      active: true,
     },
     {
       id: 2,
       linkName: "Order List",
       linkImg: "/list.png",
       href: "/orders",
-      active: true,
     },
     // {
     //   id: 3,
     //   linkName: "Order Detail",
     //   linkImg: "/order.png",
-    //   href: "/order-detail",
-    //   active: true,
+    //   href: "/orderDetail",
     // },
     {
       id: 4,
       linkName: "Customers",
       linkImg: "/customer.png",
       href: "/customers",
-      active: true,
     },
     {
       id: 5,
       linkName: "Analytics",
       linkImg: "/analis.png",
-      href: "#",
-      active: true,
+      href: "/analis",
     },
     {
       id: 6,
       linkName: "Review",
       linkImg: "/review.png",
-      href: "#",
-      active: true,
+      href: "/review",
     },
     {
       id: 7,
       linkName: "Foods",
       linkImg: "/food.png",
-      href: "#",
-      active: true,
+      href: "/food",
     },
     {
       id: 8,
       linkName: "Food Detail",
       linkImg: "/foodDetail.png",
-      href: "#",
-      active: true,
+      href: "/foodDetail",
     },
     {
       id: 9,
       linkName: "Customer Detail",
       linkImg: "/customerDetail.png",
-      href: "#",
-      active: true,
+      href: "/customerDetail",
     },
     {
       id: 10,
       linkName: "Calendar",
       linkImg: "/calendar.png",
-      href: "#",
-      active: true,
+      href: "/calendar",
     },
     {
       id: 11,
       linkName: "Chat",
       linkImg: "/chat.png",
-      href: "#",
-      active: true,
+      href: "/chat",
     },
     {
       id: 12,
       linkName: "Wallet",
       linkImg: "/wallet.png",
-      href: "#",
-      active: true,
+      href: "/wallet",
     },
   ];
   return (
     <div>
-      <Head></Head>
-
+      <Head />
       <aside className={styles["aside"]}>
         <div className={styles["aside-header"]}>
           <Image
@@ -119,22 +106,25 @@ function Navigation(props) {
           </p>
         </div>
         <div className={styles["buttonsMenu"]}>
-          {links.map(({ id, href, linkName, linkImg, active }) => (
-            <Links
-              key={id}
-              linkName={linkName}
-              linkImg={linkImg}
-              href={href}
-              active={active}
-            />
-          ))}
+          {links.map(({ id, href, linkName, linkImg }) => {
+            const active = router.pathname.startsWith(href);
+            return (
+              <CustomLink
+                key={id}
+                linkName={linkName}
+                linkImg={linkImg}
+                href={href}
+                active={active}
+              />
+            );
+          })}
         </div>
         <div className={styles["addMenus"]}>
           <div className={styles["addMenusText"]}>
             <p>Please, organize your menus through button bellow!</p>
             <button>+Add Menus</button>
           </div>
-          <Image width={76} height={90} src="/illustration.png" alt="" />
+          <Image src="/illustration.png" width={77} height={91} alt="grand" />
         </div>
         <div className={styles["about"]}>
           <p>Sedap Restaurant Admin Dashboard</p>
@@ -147,20 +137,16 @@ function Navigation(props) {
   );
 }
 
-function Links(props) {
+function CustomLink(props) {
   const { linkName, linkImg, href, active } = props;
-  const router = useRouter();
-
-  const isActive = router.asPath.startsWith(href) && router.asPath !== "/";
-
   return (
     <>
       <Link
-        className={`${isActive ? styles.active : ""}`}
+        className={`${active ? styles.active : ""}`}
         href={href}
         style={{
-          background: isActive ? "#00B07426" : "",
-          color: isActive ? "#177556" : "",
+          background: active ? "#00B07426" : "",
+          color: active === href ? "#177556" : "",
         }}
       >
         <Image src={linkImg} alt={linkName} width={20} height={20} />

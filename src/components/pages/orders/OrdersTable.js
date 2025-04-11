@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "@/styles/order.module.css";
-import orderListData from "@/data";
+import { orderListData } from "@/data";
 import { useRouter } from "next/router";
 
-export default function () {
+export default function OrderTable() {
   const columns = [
     {
       id: "0",
@@ -74,7 +74,7 @@ function TableRow(props) {
 
   return (
     <tr
-      className={styles["tr"]}
+      className={styles["hoverTr"]}
       style={{ cursor: "pointer" }}
       onClick={() => goToDetails(item.id)}
     >

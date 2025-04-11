@@ -42,6 +42,13 @@
   border: 1px solid #ff5b5b;
   border-radius: 12px;
 }
+.cancelBtn:hover {
+  padding: 18px 66px;
+  color: #ff5b5b;
+  background-color: #ff5b5b4d;
+  border: 1px solid #ff5b5b26;
+  border-radius: 12px;
+}
 
 .onDelivery {
   padding: 18px 66px;
