@@ -147,6 +147,24 @@ export const customerListData = [
       exp: "02/21",
       owner: "Eren Yeager",
     },
+    items: [
+      {
+        id: 1,
+        foodName: "Chicken Caesar Salad",
+        food: "SALAD",
+        price: 72.5,
+        person: 3,
+        min: 20,
+      },
+      {
+        id: 2,
+        foodName: "Beef Wellington",
+        food: "BEEF",
+        price: 90.0,
+        person: 4,
+        min: 25,
+      },
+    ],
   },
   {
     id: "2",
@@ -166,6 +184,24 @@ export const customerListData = [
       exp: "02/21",
       owner: "Grisha Yeager",
     },
+    items: [
+      {
+        id: 1,
+        foodName: "Chicken Caesar Salad",
+        food: "SALAD",
+        price: 72.5,
+        person: 3,
+        min: 20,
+      },
+      {
+        id: 2,
+        foodName: "Beef Wellington",
+        food: "BEEF",
+        price: 90.0,
+        person: 4,
+        min: 25,
+      },
+    ],
   },
   {
     id: "3",
@@ -185,6 +221,24 @@ export const customerListData = [
       exp: "02/21",
       owner: "Historia Reuss",
     },
+    items: [
+      {
+        id: 1,
+        foodName: "Chicken Caesar Salad",
+        food: "SALAD",
+        price: 72.5,
+        person: 3,
+        min: 20,
+      },
+      {
+        id: 2,
+        foodName: "Beef Wellington",
+        food: "BEEF",
+        price: 90.0,
+        person: 4,
+        min: 25,
+      },
+    ],
   },
   {
     id: "4",
@@ -204,6 +258,24 @@ export const customerListData = [
       exp: "02/21",
       owner: "Levi Ackerman",
     },
+    items: [
+      {
+        id: 1,
+        foodName: "Chicken Caesar Salad",
+        food: "SALAD",
+        price: 72.5,
+        person: 3,
+        min: 20,
+      },
+      {
+        id: 2,
+        foodName: "Beef Wellington",
+        food: "BEEF",
+        price: 90.0,
+        person: 4,
+        min: 25,
+      },
+    ],
   },
   {
     id: "5",
@@ -223,5 +295,23 @@ export const customerListData = [
       exp: "02/21",
       owner: "Armin Melaney",
     },
+    items: [
+      {
+        id: 1,
+        foodName: "Chicken Caesar Salad",
+        food: "SALAD",
+        price: 72.5,
+        person: 3,
+        min: 20,
+      },
+      {
+        id: 2,
+        foodName: "Beef Wellington",
+        food: "BEEF",
+        price: 90.0,
+        person: 4,
+        min: 25,
+      },
+    ],
   },
 ];
