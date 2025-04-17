@@ -186,3 +186,9 @@
   padding: 25px;
   border-radius: 50%;
 }
+
+@media (max-width: 1782px) {
+  .dvBtn {
+    display: none;
+  }
+}

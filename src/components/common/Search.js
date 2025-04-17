@@ -36,7 +36,7 @@ function Search() {
         <input placeholder="Search here" />
         <Image src="/searchLogo.png" alt="d" width={24} height={24} />
       </div>
-      <div>
+      <div className={styles.dvBtn}>
         {btnArr.map((item) => (
           <SearchBtn
             key={item.id}
