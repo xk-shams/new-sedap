@@ -315,3 +315,24 @@ export const customerListData = [
     ],
   },
 ];
+
+export const foodData = [
+  {
+    id: "1",
+    cotegoriya: "food",
+    type: "pizza",
+    name: "Pizza la Piazza Special Nuggets",
+  },
+  {
+    id: "2",
+    cotegoriya: "food",
+    type: "pizza",
+    name: "Pizza la Piazza Special Nuggets",
+  },
+  {
+    id: "3",
+    cotegoriya: "food",
+    type: "pizza",
+    name: "Pizza la Piazza Special Nuggets",
+  },
+];
