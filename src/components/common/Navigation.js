@@ -50,7 +50,7 @@ function Navigation(props) {
       id: 7,
       linkName: "Foods",
       linkImg: "/food.png",
-      href: "/food",
+      href: "/foods",
     },
     {
       id: 8,
