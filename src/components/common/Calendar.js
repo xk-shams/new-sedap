@@ -10,6 +10,7 @@ function Calendar() {
         <select>
           <option>Today</option>
           <option>Today1</option>
+          <option>Today2</option>
         </select>
       </div>
     </div>
