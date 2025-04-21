@@ -319,30 +319,38 @@ export const customerListData = [
 export const foodData = [
   {
     id: "1",
-    cotegoriya: "Food",
+    category: "Food",
     type: "Burger",
-    prize: 100,
+    price: 200,
     name: "Burger Jumbo Special With Spicy",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
   {
     id: "2",
-    cotegoriya: "Food",
-    prize: 100,
+    category: "Food",
+    price: 100,
     type: "pizza",
     name: "Pizza la Piazza Special Nuggets",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
   {
     id: "3",
-    cotegoriya: "Food",
-    prize: 100,
+    category: "Food",
+    price: 400,
     type: "Noodle",
     name: "Spicy Mozarella with Barbeque",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
   {
     id: "4",
-    cotegoriya: "Drink",
+    category: "Drink",
     type: "Sprite",
-    prize: 100,
+    price: 300,
     name: "Sprite Flavour with Avocado Juice",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
 ];

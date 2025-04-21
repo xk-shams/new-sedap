@@ -8,9 +8,7 @@ export default function FoodDetail() {
       <Head>
         <title>Foods Detail</title>
       </Head>
-      <div>
-        <h1>Food Detail</h1>
-      </div>
+      <div></div>
     </>
   );
 }
