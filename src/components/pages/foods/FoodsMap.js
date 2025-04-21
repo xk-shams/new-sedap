@@ -1,10 +1,14 @@
-import React from "react";
+import React, { use } from "react";
 import { foodData } from "@/data";
 import Box from "@mui/material/Box";
 import CustomBtnFood from "@/components/pages/foods/CustomBtnFood";
 import Variants from "@/components/pages/foods/Skeleton";
+import { useRouter } from "next/router";
+
 function FoodsMap(props) {
   const { data } = props;
+  const router = useRouter();
+
   return (
     <div
       style={{
@@ -100,6 +104,7 @@ function FoodsMap(props) {
                   back="#00B07426"
                   img="/foodIcon.png"
                   text="View"
+                  onClick={() => router.push(`/foods/${food.id}`)}
                 />
                 <CustomBtnFood
                   back="#FF5B5B26"

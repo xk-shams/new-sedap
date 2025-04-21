@@ -3,7 +3,7 @@ import Image from "next/image";
 import IconButton from "@mui/material/IconButton";
 
 function CustomBtnFood(props) {
-  const { back, img, text } = props;
+  const { back, img, text, onClick } = props;
   return (
     <div
       style={{
@@ -13,6 +13,7 @@ function CustomBtnFood(props) {
       }}
     >
       <IconButton
+        onClick={onClick}
         color="primary"
         style={{
           padding: "6px",
