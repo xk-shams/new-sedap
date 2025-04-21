@@ -52,18 +52,7 @@ function Navigation(props) {
       linkImg: "/food.png",
       href: "/foods",
     },
-    {
-      id: 8,
-      linkName: "Food Detail",
-      linkImg: "/foodDetail.png",
-      href: "/foodDetail",
-    },
-    {
-      id: 9,
-      linkName: "Customer Detail",
-      linkImg: "/customerDetail.png",
-      href: "/customerDetail",
-    },
+
     {
       id: 10,
       linkName: "Calendar",

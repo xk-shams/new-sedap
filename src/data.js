@@ -319,20 +319,30 @@ export const customerListData = [
 export const foodData = [
   {
     id: "1",
-    cotegoriya: "food",
-    type: "pizza",
-    name: "Pizza la Piazza Special Nuggets",
+    cotegoriya: "Food",
+    type: "Burger",
+    prize: 100,
+    name: "Burger Jumbo Special With Spicy",
   },
   {
     id: "2",
-    cotegoriya: "food",
+    cotegoriya: "Food",
+    prize: 100,
     type: "pizza",
     name: "Pizza la Piazza Special Nuggets",
   },
   {
     id: "3",
-    cotegoriya: "food",
-    type: "pizza",
-    name: "Pizza la Piazza Special Nuggets",
+    cotegoriya: "Food",
+    prize: 100,
+    type: "Noodle",
+    name: "Spicy Mozarella with Barbeque",
+  },
+  {
+    id: "4",
+    cotegoriya: "Drink",
+    type: "Sprite",
+    prize: 100,
+    name: "Sprite Flavour with Avocado Juice",
   },
 ];
