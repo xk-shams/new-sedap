@@ -36,7 +36,6 @@ function FoodsMap(props) {
     console.log("delete food: ", foodId);
     // ochiriw logikasi
 
-    //
     setIsDialogOpen({
       isOpen: false,
       food: null,
@@ -76,6 +75,7 @@ function FoodsMap(props) {
               flexDirection: "column",
               padding: "0px 30px 30px 30px",
               borderRadius: "14px",
+              marginBottom: "70px",
             }}
             key={food.id}
           >
@@ -209,7 +209,6 @@ function FoodsMap(props) {
           </Button>
         </DialogActions>
       </Dialog>
-      {/* View food */}
 
       <Dialog
         open={isViewOpen.isOpen}
@@ -234,7 +233,6 @@ function FoodsMap(props) {
 
             return (
               <>
-                {/* Chap taraf: Rasm */}
                 <div style={{ flex: 1 }}>
                   <img
                     src={item.image || "https://via.placeholder.com/300"}
