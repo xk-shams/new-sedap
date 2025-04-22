@@ -65,6 +65,7 @@ function FoodsMap(props) {
       {data.map((food) => {
         return (
           <div
+            key={food.id}
             style={{
               maxWidth: "276px",
               maxHeight: "360px",
@@ -77,7 +78,6 @@ function FoodsMap(props) {
               borderRadius: "14px",
               marginBottom: "70px",
             }}
-            key={food.id}
           >
             <div
               style={{
@@ -233,19 +233,7 @@ function FoodsMap(props) {
 
             return (
               <>
-                <div style={{ flex: 1 }}>
-                  <img
-                    src={item.image || "https://via.placeholder.com/300"}
-                    alt={item.name}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      borderRadius: "16px",
-                      objectFit: "cover",
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                    }}
-                  />
-                </div>
+                <div style={{ flex: 1 }}></div>
 
                 {/* O‘ng taraf: Ma’lumotlar */}
                 <div
@@ -262,7 +250,7 @@ function FoodsMap(props) {
                       {item.comment}
                     </p>
                     <h3 style={{ color: "#1976d2", marginTop: "15px" }}>
-                      {item.price} so'm
+                      {item.price} som
                     </h3>
                   </div>
                   <Button variant="contained" color="primary">
