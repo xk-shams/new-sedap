@@ -65,123 +65,113 @@ function FoodsMap(props) {
     >
       {data.map((food) => {
         return (
-          <Box
-            key={food.id}
-            component="section"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "end",
-              p: 2,
+          <div
+            style={{
               maxWidth: "276px",
-              maxHeight: "433px",
-              minHeight: "433px",
-              position: "relative",
+              maxHeight: "360px",
+              width: "360px",
+              backgroundColor: "#FFFFFF",
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              padding: "0px 30px 30px 30px",
+              borderRadius: "14px",
             }}
+            key={food.id}
           >
-            <Box
-              sx={{
-                position: "absolute",
-                top: "0px",
-                minWidth: "194px",
+            <div
+              style={{
                 maxWidth: "194px",
-                minHeight: "194px",
+                minWidth: "194px",
                 maxHeight: "194px",
-                background: "#C4C4C4",
+                minHeight: "194px",
+                backgroundColor: "#C4C4C4",
                 boxShadow: "11px 13px 17px 0px #00000026",
                 borderRadius: "50%",
+                marginBottom: "42px",
+                marginTop: "-74px",
               }}
-            ></Box>
-            <Box
-              sx={{
-                backgroundColor: "#FFFFFF",
+            ></div>
+            <div
+              style={{
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
-                maxWidth: "276px",
-                minWidth: "276px",
-                maxHeight: "359px",
-                paddingTop: "172px",
-                minHeight: "359px",
-                borderRadius: "14px",
               }}
             >
               <h2
                 style={{
-                  maxWidth: "174px",
-                  fontFamily: "Barlow",
-                  fontWeight: "700",
+                  fontWeight: 700,
                   fontSize: "18px",
                   lineHeight: "28px",
                   textAlign: "center",
+                  maxWidth: "194px",
+                  color: "#464255",
+                  width: "100%",
+
+                  marginBottom: "8px",
                 }}
               >
                 {food.name}
               </h2>
               <p
                 style={{
-                  fontWeight: "400",
+                  fontWeight: 400,
                   fontSize: "14px",
                   lineHeight: "20px",
+                  textAlign: "center",
                   color: "#00B074",
-                  marginTop: "7px",
+                  marginBottom: "22px",
                 }}
               >
                 {food.category} /{" "}
-                <span
+                <span style={{ color: "#5E6C93" }}>{food.type}</span>
+                <div
                   style={{
-                    color: "#5E6C93",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "20px",
+                    marginTop: "22px",
                   }}
                 >
-                  {food.type}
-                </span>
+                  <CustomBtnFood
+                    back="#00B07426"
+                    img="/foodIcon.png"
+                    text="View"
+                    onClick={() =>
+                      setIsViewOpen({
+                        isOpen: true,
+                        foodId: food.id, // food.id ni saqlaymiz
+                      })
+                    }
+                  />
+                  <CustomBtnFood
+                    onClick={() => router.push(`/foods/${food.id}/edit`)}
+                    back="#FF5B5B26"
+                    img="/foodIcon2.png"
+                    text="Edit"
+                  />
+                  <CustomBtnFood
+                    onClick={() =>
+                      setIsDialogOpen({
+                        isOpen: true,
+                        food,
+                      })
+                    }
+                    back="#2D9CDB26"
+                    img="/foodIcon3.png"
+                    text="Delete"
+                  />
+                  <CustomBtnFood
+                    onClick={() => router.push(`/foods/${food.id}/edit`)}
+                    back="#5E6C9326"
+                    img="/foodIcon4.png"
+                    text="Duplicate"
+                  />
+                </div>
               </p>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "20px",
-                  marginTop: "22px",
-                }}
-              >
-                <CustomBtnFood
-                  back="#00B07426"
-                  img="/foodIcon.png"
-                  text="View"
-                  onClick={() =>
-                    setIsViewOpen({
-                      isOpen: true,
-                      foodId: food.id, // food.id ni saqlaymiz
-                    })
-                  }
-                />
-                <CustomBtnFood
-                  onClick={() => router.push(`/foods/${food.id}/edit`)}
-                  back="#FF5B5B26"
-                  img="/foodIcon2.png"
-                  text="Edit"
-                />
-                <CustomBtnFood
-                  onClick={() =>
-                    setIsDialogOpen({
-                      isOpen: true,
-                      food,
-                    })
-                  }
-                  back="#2D9CDB26"
-                  img="/foodIcon3.png"
-                  text="Delete"
-                />
-                <CustomBtnFood
-                  onClick={() => router.push(`/foods/${food.id}/edit`)}
-                  back="#5E6C9326"
-                  img="/foodIcon4.png"
-                  text="Duplicate"
-                />
-              </div>
-            </Box>
-          </Box>
+            </div>
+          </div>
         );
       })}
       <Dialog

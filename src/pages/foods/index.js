@@ -41,7 +41,7 @@ export default function Foods() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "55px",
+            marginBottom: "130px",
           }}
         >
           <PageTitle

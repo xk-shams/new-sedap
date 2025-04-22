@@ -353,4 +353,13 @@ export const foodData = [
     comment:
       "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
+  {
+    id: "4",
+    category: "Drink",
+    type: "Sprite",
+    price: 300,
+    name: "Sprite Flavour with Avocado Juice",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
+  },
 ];
