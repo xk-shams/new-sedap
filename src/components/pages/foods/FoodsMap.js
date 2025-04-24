@@ -4,18 +4,15 @@ import { useRouter } from "next/router";
 
 function FoodsMap({ selected, data }) {
   const router = useRouter();
+  console.log("-=-=-", data);
 
   return (
     <div
       style={{
         display: "flex",
         alignItems: "center",
-        ...(selected === "left"
-          ? { flexWrap: "wrap" }
-          : { flexDirection: "column" }),
-        ...(selected === "left"
-          ? { marginTop: "130px" }
-          : { marginTop: "50px" }),
+        ...(selected === "left" ? { flexWrap: "wrap" } : { flexDirection: "column" }),
+        ...(selected === "left" ? { marginTop: "130px" } : { marginTop: "50px" }),
         gap: "20px",
       }}
     >
@@ -80,8 +77,7 @@ function FoodsMap({ selected, data }) {
                     marginBottom: "22px",
                   }}
                 >
-                  {food.category} /{" "}
-                  <span style={{ color: "#5E6C93" }}>{food.type}</span>
+                  {food.category?.name} / <span style={{ color: "#5E6C93" }}>{food.type}</span>
                   <div
                     style={{
                       display: "flex",
