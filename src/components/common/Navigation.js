@@ -3,7 +3,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "@/styles/Aside.module.css";
-import Section from "./Section";
+import {
+  CiBank,
+  CiChat1,
+  CiWallet,
+  CiCalendar,
+  CiForkAndKnife,
+  CiAlignBottom,
+  CiViewList,
+  CiUser,
+  CiStar,
+} from "react-icons/ci";
 import Image from "next/image";
 
 function Navigation(props) {
@@ -13,65 +23,59 @@ function Navigation(props) {
     {
       id: 1,
       linkName: "Dashboard",
-      linkImg: "/home.png",
+      icon: CiBank,
       href: "/dashboard",
     },
     {
       id: 2,
       linkName: "Order List",
-      linkImg: "/list.png",
+      icon: CiViewList,
       href: "/orders",
     },
-    // {
-    //   id: 3,
-    //   linkName: "Order Detail",
-    //   linkImg: "/order.png",
-    //   href: "/orderDetail",
-    // },
     {
       id: 4,
       linkName: "Customers",
-      linkImg: "/customer.png",
+      icon: CiUser,
       href: "/customers",
     },
     {
       id: 5,
       linkName: "Analytics",
-      linkImg: "/analis.png",
+      icon: CiAlignBottom,
       href: "/analis",
     },
     {
       id: 6,
       linkName: "Review",
-      linkImg: "/review.png",
+      icon: CiStar,
       href: "/review",
     },
     {
       id: 7,
       linkName: "Foods",
-      linkImg: "/food.png",
+      icon: CiForkAndKnife,
       href: "/foods",
     },
-
     {
       id: 10,
       linkName: "Calendar",
-      linkImg: "/calendar.png",
+      icon: CiCalendar,
       href: "/calendar",
     },
     {
       id: 11,
       linkName: "Chat",
-      linkImg: "/chat.png",
+      icon: CiChat1,
       href: "/chat",
     },
     {
       id: 12,
       linkName: "Wallet",
-      linkImg: "/wallet.png",
+      icon: CiWallet,
       href: "/wallet",
     },
   ];
+
   return (
     <div>
       <Head />
@@ -95,13 +99,13 @@ function Navigation(props) {
           </p>
         </div>
         <div className={styles["buttonsMenu"]}>
-          {links.map(({ id, href, linkName, linkImg }) => {
+          {links.map(({ id, href, linkName, icon }) => {
             const active = router.pathname.startsWith(href);
             return (
               <CustomLink
                 key={id}
                 linkName={linkName}
-                linkImg={linkImg}
+                icon={icon}
                 href={href}
                 active={active}
               />
@@ -127,21 +131,28 @@ function Navigation(props) {
 }
 
 function CustomLink(props) {
-  const { linkName, linkImg, href, active } = props;
+  const { linkName, icon: Icon, href, active } = props;
   return (
-    <>
-      <Link
-        className={`${active ? styles.active : ""}`}
-        href={href}
-        style={{
-          background: active ? "#00B07426" : "",
-          color: active === href ? "#177556" : "",
-        }}
-      >
-        <Image src={linkImg} alt={linkName} width={20} height={20} />
-        {linkName}
-      </Link>
-    </>
+    <Link
+      className={`${active ? styles.active : ""}`}
+      href={href}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "20px",
+        background: active ? "#00B07426" : "",
+        color: active === href ? "#177556" : "",
+        padding: "12px 20px",
+        borderRadius: "12px",
+        textDecoration: "none",
+        fontWeight: 500,
+      }}
+    >
+      <Icon
+        style={{ fontSize: "25px", color: active ? "#00B074" : "#B9BBBD" }}
+      />
+      {linkName}
+    </Link>
   );
 }
 

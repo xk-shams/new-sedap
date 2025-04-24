@@ -1,13 +1,14 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import PageTitle from "@/components/common/PageTitle";
 import { foodData } from "@/data";
 import FoodsMap from "@/components/pages/foods/FoodsMap";
 import FoodMapSkeleton from "@/components/pages/foods/FoodMapSkeleton";
 import FoodSearch from "@/components/pages/foods/FoodSearch";
-import FoodSelect from "@/components/pages/foods/FoodSelect";
+import FoodBtn from "@/components/pages/foods/FoodBtn";
 import NewBtn from "@/components/pages/foods/NewBtn";
+import { CiGrid41, CiServer } from "react-icons/ci";
 
 export default function Foods() {
   const [foods, setFoods] = useState(null);
@@ -29,6 +30,7 @@ export default function Foods() {
       setFilteredFoods(filtered);
     }
   }, [searchValue, foods]);
+  const [selected, setSelected] = useState("left");
 
   return (
     <>
@@ -41,7 +43,6 @@ export default function Foods() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "130px",
           }}
         >
           <PageTitle
@@ -56,21 +57,7 @@ export default function Foods() {
             }}
           >
             <FoodSearch onChange={setSearchValue} />
-            <FoodSelect
-              img="/foodSelectImg.png"
-              item={{
-                name: "noodle",
-                name2: "pizza",
-                name3: "burger",
-              }}
-            />
-            <FoodSelect
-              img="/foodSelectImg2.png"
-              item={{
-                name: "food",
-                name2: "drink",
-              }}
-            />
+            <FoodBtn selected={selected} onSelect={setSelected} />
             <NewBtn />
           </div>
         </div>
@@ -89,7 +76,7 @@ export default function Foods() {
               </h1>
             )
           ) : (
-            <FoodsMap data={foods} />
+            <FoodsMap data={foods} selected={selected} />
           )
         ) : (
           <FoodMapSkeleton count={3} />

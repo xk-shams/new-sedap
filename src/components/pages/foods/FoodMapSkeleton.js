@@ -10,6 +10,7 @@ function FoodMapSkeleton() {
         alignItems: "center",
         flexWrap: "wrap",
         gap: "20px",
+        marginTop: "130px",
       }}
     >
       {foodData.map((food) => {
