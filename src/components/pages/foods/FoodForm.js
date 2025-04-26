@@ -9,13 +9,12 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useState } from "react";
 
 function FoodForm({ title, food, btnText }) {
   const [formData, setFormData] = useState(null);
   const [category, setCategory] = useState("");
-  const [cats, setCats] = useState([]);
-  console.log("food", food);
 
   useEffect(() => {
     if (food) {
@@ -33,19 +32,7 @@ function FoodForm({ title, food, btnText }) {
     });
   };
 
-  useEffect(() => {
-    fetch("http://localhost:1337/api/categories?populate=*", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-        setCats(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const [categories, isLoading] = useFetchApiItems("/categories?populate=*&abror");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -142,7 +129,7 @@ function FoodForm({ title, food, btnText }) {
                 label="Category"
                 onChange={(e) => setCategory(e.target.value)}
               >
-                {cats.map((cat) => (
+                {categories.map((cat) => (
                   <MenuItem key={cat.id} value={cat.documentId}>
                     {cat.name}
                   </MenuItem>

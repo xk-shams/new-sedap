@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import PageTitle from "@/components/common/PageTitle";
 import { foodData } from "@/data";
@@ -8,11 +8,10 @@ import FoodMapSkeleton from "@/components/pages/foods/FoodMapSkeleton";
 import FoodSearch from "@/components/pages/foods/FoodSearch";
 import FoodBtn from "@/components/pages/foods/FoodBtn";
 import NewBtn from "@/components/pages/foods/NewBtn";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { CiGrid41, CiServer } from "react-icons/ci";
 
 export default function Foods() {
-  const [foods, setFoods] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
   const [selected, setSelected] = useState("left");
@@ -25,22 +24,10 @@ export default function Foods() {
   //     setFilteredFoods(filtered);
   //   }
   // }, [searchValue, foods]);
+  // http://192.168.100.108
+  // query
 
-  useEffect(() => {
-    fetch("http://localhost:1337/api/foods?populate=*", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-        setFoods(data.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
-  }, []);
+  const [foods, isLoading] = useFetchApiItems("/foods?populate=*&abror");
 
   return (
     <>
