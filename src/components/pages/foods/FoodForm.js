@@ -1,9 +1,20 @@
-import React, { useEffect } from "react";
-import { TextField, Button, Grid, Box } from "@mui/material";
+import React, { use, useEffect } from "react";
+import {
+  TextField,
+  Button,
+  Grid,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useState } from "react";
 
 function FoodForm({ title, food, btnText }) {
   const [formData, setFormData] = useState(null);
+  const [category, setCategory] = useState("");
+  const [cats, setCats] = useState([]);
   console.log("food", food);
 
   useEffect(() => {
@@ -22,10 +33,48 @@ function FoodForm({ title, food, btnText }) {
     });
   };
 
+  useEffect(() => {
+    fetch("http://localhost:1337/api/categories?populate=*", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+        setCats(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
+    // console.log("Form Submitted", formData);
+
+    const values = {
+      data: {
+        name: "Test",
+        price: 123,
+        category: {
+          connect: [category],
+        },
+      },
+    };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    };
+    fetch("http://localhost:1337/api/foods", options)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
   };
+
+  console.log("category", category);
 
   if (!formData) {
     return null;
@@ -84,7 +133,23 @@ function FoodForm({ title, food, btnText }) {
 
           {/* Category */}
           <Grid item size={6}>
-            <TextField
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Category"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {cats.map((cat) => (
+                  <MenuItem key={cat.id} value={cat.documentId}>
+                    {cat.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            {/* <TextField
               fullWidth
               label="Category"
               variant="outlined"
@@ -107,7 +172,7 @@ function FoodForm({ title, food, btnText }) {
                   },
                 },
               }}
-            />
+            /> */}
           </Grid>
 
           {/* Type */}

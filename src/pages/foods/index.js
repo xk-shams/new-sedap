@@ -55,10 +55,7 @@ export default function Foods() {
             justifyContent: "space-between",
           }}
         >
-          <PageTitle
-            title="Foods"
-            subtitle="Here is your menus summary with graph view"
-          />
+          <PageTitle title="Foods" subtitle="Here is your menus summary with graph view" />
           <div
             style={{
               display: "flex",
