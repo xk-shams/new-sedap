@@ -323,6 +323,10 @@ export const foodData = [
     type: "Burger",
     price: 200,
     name: "Burger Jumbo Special With Spicy",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     comment:
       "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
@@ -330,8 +334,12 @@ export const foodData = [
     id: "2",
     category: "Food",
     price: 100,
-    type: "pizza",
+    type: "Pizza",
     name: "Pizza la Piazza Special Nuggets",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     comment:
       "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
@@ -341,6 +349,10 @@ export const foodData = [
     price: 400,
     type: "Noodle",
     name: "Spicy Mozarella with Barbeque",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     comment:
       "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
@@ -350,6 +362,10 @@ export const foodData = [
     type: "Sprite",
     price: 300,
     name: "Sprite Flavour with Avocado Juice",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     comment:
       "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
@@ -359,6 +375,10 @@ export const foodData = [
     type: "Sprite",
     price: 300,
     name: "Sprite Flavour with Avocado Juice",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     comment:
       "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },

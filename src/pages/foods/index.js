@@ -11,26 +11,36 @@ import NewBtn from "@/components/pages/foods/NewBtn";
 import { CiGrid41, CiServer } from "react-icons/ci";
 
 export default function Foods() {
-  const [foods, setFoods] = useState(null);
+  const [foods, setFoods] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFoods(foodData);
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    if (foods && searchValue.length > 0) {
-      const filtered = foods.filter((item) =>
-        item.name.toLowerCase().includes(searchValue.toLowerCase())
-      );
-      setFilteredFoods(filtered);
-    }
-  }, [searchValue, foods]);
   const [selected, setSelected] = useState("left");
+
+  // useEffect(() => {
+  //   if (foods && searchValue.length > 0) {
+  //     const filtered = foods.filter((item) =>
+  //       item.name.toLowerCase().includes(searchValue.toLowerCase())
+  //     );
+  //     setFilteredFoods(filtered);
+  //   }
+  // }, [searchValue, foods]);
+
+  useEffect(() => {
+    fetch("http://localhost:1337/api/foods?populate=*", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+        setFoods(data.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -62,7 +72,7 @@ export default function Foods() {
           </div>
         </div>
 
-        {foods ? (
+        {!isLoading ? (
           searchValue.length > 0 ? (
             filteredFoods.length > 0 ? (
               <FoodsMap data={filteredFoods} />
