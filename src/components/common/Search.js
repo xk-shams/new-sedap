@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import styles from "@/styles/Aside.module.css";
 import SearchBtn from "./SearchBtn";
 
 function Search() {
@@ -31,12 +30,52 @@ function Search() {
     },
   ];
   return (
-    <div className={styles.searchMain}>
-      <div className={styles.searchInputDv}>
-        <input placeholder="Search here" />
-        <Image src="/searchLogo.png" alt="d" width={24} height={24} />
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        marginBottom: "40px",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "58%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          border: "1px solid #ebebeb",
+          borderRadius: "8px",
+        }}
+      >
+        <input
+          placeholder="Search here"
+          style={{
+            width: "100%",
+            borderRadius: "8px",
+            border: "none",
+            padding: "15px 28px",
+            fontWeight: 400,
+            fontSize: "16px",
+          }}
+        />
+        <Image
+          src="/searchLogo.png"
+          alt="d"
+          width={24}
+          height={24}
+          style={{
+            position: "absolute",
+            backgroundColor: "white",
+            padding: "2px",
+            right: "28px",
+          }}
+        />
       </div>
-      <div className={styles.dvBtn}>
+
+      <div>
         {btnArr.map((item) => (
           <SearchBtn
             key={item.id}
@@ -46,10 +85,30 @@ function Search() {
           />
         ))}
       </div>
-      <hr />
-      <div className={styles.profilDv}>
+      <hr
+        style={{
+          width: "1px",
+          height: "56px",
+          borderRadius: "8px",
+          background: "#d0d6de",
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+        }}
+      >
         <h3>Hello, Samantha</h3>
-        <button></button>
+        <button
+          style={{
+            background: "#c4c4c4",
+            border: "4px solid #ffffff",
+            padding: "25px",
+            borderRadius: "50%",
+          }}
+        ></button>
       </div>
     </div>
   );

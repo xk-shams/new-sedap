@@ -1,8 +1,11 @@
 import React from "react";
 import { foodData } from "@/data";
 import Variants from "@/components/pages/foods/Skeleton";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 function FoodMapSkeleton() {
+  const [items, setIsLoading] = useFetchApiItems();
+
   return (
     <div
       style={{
@@ -13,7 +16,7 @@ function FoodMapSkeleton() {
         marginTop: "130px",
       }}
     >
-      {foodData.map((food) => {
+      {items.map((food) => {
         return <Variants key={food.id} />;
       })}
     </div>
