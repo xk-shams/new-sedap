@@ -11,30 +11,19 @@ import {
 } from "@mui/material";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 
-const foodInitialValues = {
-  name: "",
-  category: "",
-  type: "",
-  price: "",
-  comment: "",
-};
-
 function FoodForm({ title, food, btnText }) {
-  const [formData, setFormData] = useState(foodInitialValues);
-  const [category, setCategory] = useState("");
-
-  const [categories, isLoading] = useFetchApiItems("/categories?populate=*");
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+    type: "",
+    price: "",
+    comment: "",
+  });
+  const [category, setCategory] = useState(""); // Handling category separately
 
   useEffect(() => {
     if (food) {
-      setFormData({
-        name: food.name || "",
-        type: food.type || "",
-        price: food.price || "",
-        comment: food.comment || "",
-        category: food.category?.id || "",
-      });
-      setCategory(food.category?.id || "");
+      setFormData(food); // Initialize form data if 'food' prop is passed
     }
   }, [food]);
 
@@ -46,24 +35,23 @@ function FoodForm({ title, food, btnText }) {
     });
   };
 
-  const handleCategoryChange = (e) => {
-    const value = e.target.value;
-    setCategory(value);
-    setFormData({
-      ...formData,
-      category: value,
-    });
-  };
+  const [categories, isLoading] = useFetchApiItems(
+    "/categories?populate=*&abror"
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Update category in formData
+    const updatedFormData = {
+      ...formData,
+      category: category, // Ensuring the selected category is part of formData
+    };
+
     const values = {
       data: {
-        name: formData.name,
-        type: formData.type,
-        price: parseFloat(formData.price),
-        comment: formData.comment,
+        name: updatedFormData.name,
+        price: updatedFormData.price,
         category: {
           connect: [category],
         },
@@ -71,7 +59,7 @@ function FoodForm({ title, food, btnText }) {
     };
 
     const options = {
-      method: "POST", // "PUT" if updating
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -79,10 +67,14 @@ function FoodForm({ title, food, btnText }) {
     };
 
     fetch("http://localhost:1337/api/foods", options)
-      .then((res) => res.json())
-      .then((data) => console.log("Submitted:", data))
-      .catch((err) => console.error("Submit Error:", err));
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
   };
+
+  if (!formData) {
+    return null;
+  }
 
   return (
     <Box
@@ -97,10 +89,18 @@ function FoodForm({ title, food, btnText }) {
         marginTop: "30px",
       }}
     >
-      <h1 style={{ color: "#00B074", marginBottom: "30px" }}>{title}</h1>
+      <h1
+        style={{
+          color: "#00B074",
+          marginBottom: "30px",
+        }}
+      >
+        {title}
+      </h1>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          {/* Name */}
+          <Grid item size={6}>
             <TextField
               fullWidth
               label="Name"
@@ -108,22 +108,37 @@ function FoodForm({ title, food, btnText }) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              sx={textFieldStyle}
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "#00B074",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00B074",
+                  },
+                },
+              }}
             />
           </Grid>
 
-          <Grid item xs={6}>
+          {/* Category */}
+          <Grid item size={6}>
             <FormControl fullWidth>
-              <InputLabel id="category-label">Category</InputLabel>
+              <InputLabel id="category-select-label">Category</InputLabel>
               <Select
-                labelId="category-label"
-                id="category-select"
+                labelId="category-select-label"
                 value={category}
                 label="Category"
-                onChange={handleCategoryChange}
+                onChange={(e) => setCategory(e.target.value)}
               >
-                {categories.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.id}>
+                {categories?.map((cat) => (
+                  <MenuItem key={cat.id} value={cat.documentId}>
                     {cat.name}
                   </MenuItem>
                 ))}
@@ -131,7 +146,8 @@ function FoodForm({ title, food, btnText }) {
             </FormControl>
           </Grid>
 
-          <Grid item xs={6}>
+          {/* Type */}
+          <Grid item size={6}>
             <TextField
               fullWidth
               label="Type"
@@ -139,11 +155,27 @@ function FoodForm({ title, food, btnText }) {
               name="type"
               value={formData.type}
               onChange={handleChange}
-              sx={textFieldStyle}
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "#00B074",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00B074",
+                  },
+                },
+              }}
             />
           </Grid>
 
-          <Grid item xs={6}>
+          {/* Price */}
+          <Grid item size={6}>
             <TextField
               fullWidth
               label="Price"
@@ -152,11 +184,27 @@ function FoodForm({ title, food, btnText }) {
               value={formData.price}
               onChange={handleChange}
               type="number"
-              sx={textFieldStyle}
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "#00B074",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00B074",
+                  },
+                },
+              }}
             />
           </Grid>
 
-          <Grid item xs={12}>
+          {/* Comment */}
+          <Grid item size={12}>
             <TextField
               fullWidth
               label="Comment"
@@ -166,10 +214,26 @@ function FoodForm({ title, food, btnText }) {
               onChange={handleChange}
               multiline
               rows={4}
-              sx={textFieldStyle}
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "#00B074",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00B074",
+                  },
+                },
+              }}
             />
           </Grid>
 
+          {/* Submit Button */}
           <Grid item xs={12}>
             <Button
               type="submit"
@@ -193,20 +257,3 @@ function FoodForm({ title, food, btnText }) {
 }
 
 export default FoodForm;
-
-const textFieldStyle = {
-  "& .MuiInputLabel-root": {
-    color: "#00B074",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#00B074",
-    },
-    "&:hover fieldset": {
-      borderColor: "#00B074",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#00B074",
-    },
-  },
-};
