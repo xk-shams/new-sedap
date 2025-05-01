@@ -77,7 +77,8 @@ function FoodsMap({ selected, data }) {
                     marginBottom: "22px",
                   }}
                 >
-                  {food.category?.name} / <span style={{ color: "#5E6C93" }}>{food.type}</span>
+                  {food.type?.category?.name} /{" "}
+                  <span style={{ color: "#5E6C93" }}>{food.type?.name}</span>
                   <div
                     style={{
                       display: "flex",

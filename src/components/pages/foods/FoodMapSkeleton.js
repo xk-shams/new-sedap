@@ -1,10 +1,7 @@
 import React from "react";
 import Variants from "@/components/pages/foods/Skeleton";
-import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 function FoodMapSkeleton() {
-  const [items, setIsLoading] = useFetchApiItems();
-  console.log(items);
   return (
     <div
       style={{

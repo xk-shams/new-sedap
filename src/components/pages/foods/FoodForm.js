@@ -8,11 +8,13 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Snackbar,
 } from "@mui/material";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useState } from "react";
 
 function FoodForm({ title, food, btnText }) {
+  const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [formData, setFormData] = useState(null);
   const [category, setCategory] = useState("");
 
@@ -32,20 +34,22 @@ function FoodForm({ title, food, btnText }) {
     });
   };
 
-  const [categories, isLoading] = useFetchApiItems(
-    "/categories?populate=*&abror"
+  const [categories, isLoading] = useFetchApiItems("/categories");
+  const [types, typesLoading] = useFetchApiItems(
+    `/types?filters[category][documentId][$eq]=${category}`
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("Form Submitted", formData);
+    console.log("Form Submitted", formData);
 
     const values = {
       data: {
-        name: "Test",
-        price: 123,
-        category: {
-          connect: [category],
+        name: formData.name ?? "test",
+        price: formData.price ?? "1000",
+        comment: formData.comment ?? "q34",
+        type: {
+          connect: [formData.type],
         },
       },
     };
@@ -68,6 +72,8 @@ function FoodForm({ title, food, btnText }) {
   if (!formData) {
     return null;
   }
+
+  console.log("hey", formData);
 
   return (
     <Box
@@ -138,58 +144,33 @@ function FoodForm({ title, food, btnText }) {
                 ))}
               </Select>
             </FormControl>
-            {/* <TextField
-              fullWidth
-              label="Category"
-              variant="outlined"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "#00B074",
-                },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#00B074",
-                  },
-                },
-              }}
-            /> */}
           </Grid>
 
           {/* Type */}
           <Grid item size={6}>
-            <TextField
-              fullWidth
-              label="Type"
-              variant="outlined"
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "#00B074",
-                },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#00B074",
-                  },
-                },
-              }}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={formData.type}
+                label="Type"
+                onChange={(e) => {
+                  handleChange({
+                    target: {
+                      name: "type",
+                      value: e.target.value,
+                    },
+                  });
+                }}
+              >
+                {[...(types ?? [])].map((type) => (
+                  <MenuItem key={type.id} value={type.documentId}>
+                    {type.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
           {/* Price */}
@@ -270,6 +251,12 @@ function FoodForm({ title, food, btnText }) {
           </Grid>
         </Grid>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={isSnackOpen}
+        onClose={() => setIsSnackOpen(false)}
+        message="Food is created"
+      />
     </Box>
   );
 }
@@ -278,7 +265,6 @@ export default FoodForm;
 
 const foodInitialValues = {
   name: "",
-  category: "",
   type: "",
   price: "",
   comment: "",
