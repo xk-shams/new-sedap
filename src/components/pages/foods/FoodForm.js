@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -10,20 +10,17 @@ import {
   MenuItem,
 } from "@mui/material";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
+import { useState } from "react";
 
 function FoodForm({ title, food, btnText }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    category: "",
-    type: "",
-    price: "",
-    comment: "",
-  });
-  const [category, setCategory] = useState(""); // Handling category separately
+  const [formData, setFormData] = useState(null);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     if (food) {
-      setFormData(food); // Initialize form data if 'food' prop is passed
+      setFormData(food);
+    } else {
+      setFormData(foodInitialValues);
     }
   }, [food]);
 
@@ -41,17 +38,12 @@ function FoodForm({ title, food, btnText }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Update category in formData
-    const updatedFormData = {
-      ...formData,
-      category: category, // Ensuring the selected category is part of formData
-    };
+    // console.log("Form Submitted", formData);
 
     const values = {
       data: {
-        name: updatedFormData.name,
-        price: updatedFormData.price,
+        name: "Test",
+        price: 123,
         category: {
           connect: [category],
         },
@@ -65,12 +57,13 @@ function FoodForm({ title, food, btnText }) {
       },
       body: JSON.stringify(values),
     };
-
     fetch("http://localhost:1337/api/foods", options)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   };
+
+  console.log("category", category);
 
   if (!formData) {
     return null;
@@ -130,20 +123,45 @@ function FoodForm({ title, food, btnText }) {
           {/* Category */}
           <Grid item size={6}>
             <FormControl fullWidth>
-              <InputLabel id="category-select-label">Category</InputLabel>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
               <Select
-                labelId="category-select-label"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 value={category}
                 label="Category"
                 onChange={(e) => setCategory(e.target.value)}
               >
-                {categories?.map((cat) => (
+                {categories.map((cat) => (
                   <MenuItem key={cat.id} value={cat.documentId}>
                     {cat.name}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
+            {/* <TextField
+              fullWidth
+              label="Category"
+              variant="outlined"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "#00B074",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00B074",
+                  },
+                },
+              }}
+            /> */}
           </Grid>
 
           {/* Type */}
@@ -257,3 +275,11 @@ function FoodForm({ title, food, btnText }) {
 }
 
 export default FoodForm;
+
+const foodInitialValues = {
+  name: "",
+  category: "",
+  type: "",
+  price: "",
+  comment: "",
+};

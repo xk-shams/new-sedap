@@ -27,7 +27,7 @@ export default function Foods() {
   // http://192.168.100.108
   // query
 
-  const [foods, isLoading] = useFetchApiItems("/foods?populate=*&abror");
+  const [foods, isLoading] = useFetchApiItems("/foods?populate=*&xkShams");
 
   return (
     <>
@@ -42,7 +42,10 @@ export default function Foods() {
             justifyContent: "space-between",
           }}
         >
-          <PageTitle title="Foods" subtitle="Here is your menus summary with graph view" />
+          <PageTitle
+            title="Foods"
+            subtitle="Here is your menus summary with graph view"
+          />
           <div
             style={{
               display: "flex",
