@@ -2,40 +2,17 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import PageTitle from "@/components/common/PageTitle";
-import { foodData } from "@/data";
 import FoodSearch from "@/components/pages/foods/FoodSearch";
 import NewBtn from "@/components/pages/foods/NewBtn";
 import { useRouter } from "next/router";
 import FoodDetailComponent from "@/components/pages/foods/FoodDetailComponent";
+import useFetchApiItem from "@/hooks/useFetchApiItem";
 
 export default function FoodDetail() {
-  const [foods, setFoods] = useState(foodData);
-  const [currentFood, setCurrentFood] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-    if (router.query.id) {
-      setCurrentFood(
-        foods.find((item) => String(item.id) === String(router.query.id))
-      );
-    }
-  }, [router.query.id]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:1337/api/foods?populate=*", {
-  //     method: "GET",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data.data);
-  //       setFoods(data.data);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
+  const [food, isLoading] = useFetchApiItem(
+    `/foods/${router.query.documentId}?populate[type][populate][0]=category`
+  );
 
   return (
     <>
@@ -57,10 +34,7 @@ export default function FoodDetail() {
             justifyContent: "space-between",
           }}
         >
-          <PageTitle
-            title="Foods"
-            subtitle="Here is your menus summary with graph view"
-          />
+          <PageTitle title="Foods" subtitle="Here is your menus summary with graph view" />
           <div
             style={{
               display: "flex",
@@ -73,11 +47,7 @@ export default function FoodDetail() {
           </div>
         </div>
 
-        {currentFood ? (
-          <FoodDetailComponent data={currentFood} />
-        ) : (
-          <p>Failed</p>
-        )}
+        {food ? <FoodDetailComponent data={food} /> : <p>Failed</p>}
       </div>
     </>
   );

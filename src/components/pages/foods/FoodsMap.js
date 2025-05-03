@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomBtnFood from "@/components/pages/foods/CustomBtnFood";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
-function FoodsMap({ selected, data }) {
+function FoodsMap({ selected, data, refetch }) {
   const router = useRouter();
-  console.log("-=-=-", data);
+  const [dialogState, setDialogState] = useState({
+    open: false,
+    foodId: null,
+  });
+
+  const handleDelete = (foodId) => {
+    if (foodId) {
+      fetch(`http://192.168.100.108:1337/api/foods/${foodId}`, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          console.log("delete:", res);
+          if (res.ok) {
+            setDialogState({
+              open: false,
+              foodId: null,
+            });
+            refetch();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <div
@@ -44,8 +77,19 @@ function FoodsMap({ selected, data }) {
                   borderRadius: "50%",
                   marginBottom: "42px",
                   marginTop: "-74px",
+                  overflow: "hidden",
                 }}
-              ></div>
+              >
+                <Image
+                  width={200}
+                  height={200}
+                  src={food.image}
+                  alt="test"
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
               <div
                 style={{
                   display: "flex",
@@ -91,19 +135,19 @@ function FoodsMap({ selected, data }) {
                       back="#00B07426"
                       img="/foodIcon.png"
                       text="View"
-                      onClick={() => router.push(`/foods/${food.id}`)}
+                      onClick={() => router.push(`/foods/${food.documentId}`)}
                     />
                     <CustomBtnFood
-                      onClick={() => router.push(`/foods/${food.id}/edit`)}
+                      onClick={() => router.push(`/foods/${food.documentId}/edit`)}
                       back="#FF5B5B26"
                       img="/foodIcon2.png"
                       text="Edit"
                     />
                     <CustomBtnFood
                       onClick={() =>
-                        setIsDialogOpen({
-                          isOpen: true,
-                          food,
+                        setDialogState({
+                          open: true,
+                          foodId: food.documentId,
                         })
                       }
                       back="#2D9CDB26"
@@ -111,7 +155,9 @@ function FoodsMap({ selected, data }) {
                       text="Delete"
                     />
                     <CustomBtnFood
-                      onClick={() => router.push(`/foods/${food.id}/edit`)}
+                      onClick={() =>
+                        router.push(`/foods/new?name=${food.name}&price=${food.price}`)
+                      }
                       back="#5E6C9326"
                       img="/foodIcon4.png"
                       text="Duplicate"
@@ -193,19 +239,19 @@ function FoodsMap({ selected, data }) {
                   back="#00B07426"
                   img="/foodIcon.png"
                   text="View"
-                  onClick={() => router.push(`/foods/${food.id}`)}
+                  onClick={() => router.push(`/foods/${food.documentId}`)}
                 />
                 <CustomBtnFood
-                  onClick={() => router.push(`/foods/${food.id}/edit`)}
+                  onClick={() => router.push(`/foods/${food.documentId}/edit`)}
                   back="#FF5B5B26"
                   img="/foodIcon2.png"
                   text="Edit"
                 />
                 <CustomBtnFood
                   onClick={() =>
-                    setIsDialogOpen({
-                      isOpen: true,
-                      food,
+                    setDialogState({
+                      open: true,
+                      foodId: food.documentId,
                     })
                   }
                   back="#2D9CDB26"
@@ -213,7 +259,7 @@ function FoodsMap({ selected, data }) {
                   text="Delete"
                 />
                 <CustomBtnFood
-                  onClick={() => router.push(`/foods/${food.id}/edit`)}
+                  onClick={() => router.push(`/foods/${food.documentId}/edit`)}
                   back="#5E6C9326"
                   img="/foodIcon4.png"
                   text="Duplicate"
@@ -221,6 +267,39 @@ function FoodsMap({ selected, data }) {
               </div>
             </div>
           ))}
+      <Dialog
+        open={dialogState.open}
+        onClose={() => {
+          setDialogState({
+            open: false,
+            foodId: null,
+          });
+        }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Are you sure?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to delete?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() =>
+              setDialogState({
+                open: false,
+                foodId: null,
+              })
+            }
+          >
+            Cancel
+          </Button>
+          <Button onClick={() => handleDelete(dialogState.foodId)} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
