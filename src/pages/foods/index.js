@@ -29,7 +29,9 @@ export default function Foods() {
 
   // populate[type][populate][0]=category
 
-  const [foods, isLoading] = useFetchApiItems("/foods?populate[type][populate][0]=category");
+  const [foods, isLoading, refetch] = useFetchApiItems(
+    "/foods?populate[type][populate][0]=category"
+  );
 
   return (
     <>
@@ -72,7 +74,7 @@ export default function Foods() {
               </h1>
             )
           ) : (
-            <FoodsMap data={foods} selected={selected} />
+            <FoodsMap data={foods} refetch={refetch} selected={selected} />
           )
         ) : (
           <FoodMapSkeleton count={3} />

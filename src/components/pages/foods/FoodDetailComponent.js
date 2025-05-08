@@ -1,7 +1,10 @@
 import React from "react";
 import { Grid, Box, Button } from "@mui/material";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function FoodDetailComponent(props) {
+  const router = useRouter();
   const { data } = props;
   return (
     <>
@@ -40,8 +43,8 @@ export default function FoodDetailComponent(props) {
                 display: "flex",
               }}
             >
-              Category: {data.category} /{" "}
-              <span style={{ color: "#00B074" }}> {data.type}</span>
+              Category: {data?.type?.category?.name} /{" "}
+              <span style={{ color: "#00B074" }}> {data?.type?.name}</span>
             </p>
           </Box>
           <Box
@@ -59,7 +62,9 @@ export default function FoodDetailComponent(props) {
                 backgroundColor: "#C4C4C4",
                 borderRadius: "14px",
               }}
-            ></div>
+            >
+              <Image width={195} height={214} src={data.image} alt="food image" />
+            </div>
             <Box
               sx={{
                 maxWidth: "312px",
@@ -108,6 +113,7 @@ export default function FoodDetailComponent(props) {
                   Add Menu
                 </Button>
                 <Button
+                  onClick={() => router.push(`/foods/${data.documentId}/edit`)}
                   variant="contained"
                   sx={{
                     backgroundColor: "#F3F2F7",

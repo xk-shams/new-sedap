@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-function useFetchApiItems(path) {
-  const [items, setItems] = useState([]);
-  const [count, setCount] = useState(1);
+function useFetchApiItem(path) {
+  const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -12,16 +11,16 @@ function useFetchApiItems(path) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.data);
-        setItems(data.data);
+        setItem(data.data);
         setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setIsLoading(false);
       });
-  }, [path, count]);
+  }, [path]);
 
-  return [items, isLoading, () => setCount(count + 1)];
+  return [item, isLoading];
 }
 
-export default useFetchApiItems;
+export default useFetchApiItem;
