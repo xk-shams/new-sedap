@@ -1,34 +1,37 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import PageTitle from "@/components/common/PageTitle";
 import { foodData } from "@/data";
 import FoodsMap from "@/components/pages/foods/FoodsMap";
 import FoodMapSkeleton from "@/components/pages/foods/FoodMapSkeleton";
 import FoodSearch from "@/components/pages/foods/FoodSearch";
-import FoodSelect from "@/components/pages/foods/FoodSelect";
+import FoodBtn from "@/components/pages/foods/FoodBtn";
 import NewBtn from "@/components/pages/foods/NewBtn";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
+import { CiGrid41, CiServer } from "react-icons/ci";
 
 export default function Foods() {
-  const [foods, setFoods] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
+  const [selected, setSelected] = useState("left");
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFoods(foodData);
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
+  // useEffect(() => {
+  //   if (foods && searchValue.length > 0) {
+  //     const filtered = foods.filter((item) =>
+  //       item.name.toLowerCase().includes(searchValue.toLowerCase())
+  //     );
+  //     setFilteredFoods(filtered);
+  //   }
+  // }, [searchValue, foods]);
+  // http://192.168.100.108
+  // query
 
-  useEffect(() => {
-    if (foods && searchValue.length > 0) {
-      const filtered = foods.filter((item) =>
-        item.name.toLowerCase().includes(searchValue.toLowerCase())
-      );
-      setFilteredFoods(filtered);
-    }
-  }, [searchValue, foods]);
+  // populate[type][populate][0]=category
+
+  const [foods, isLoading, refetch] = useFetchApiItems(
+    "/foods?populate[type][populate][0]=category"
+  );
 
   return (
     <>
@@ -41,13 +44,9 @@ export default function Foods() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "55px",
           }}
         >
-          <PageTitle
-            title="Foods"
-            subtitle="Here is your menus summary with graph view"
-          />
+          <PageTitle title="Foods" subtitle="Here is your menus summary with graph view" />
           <div
             style={{
               display: "flex",
@@ -56,26 +55,12 @@ export default function Foods() {
             }}
           >
             <FoodSearch onChange={setSearchValue} />
-            <FoodSelect
-              img="/foodSelectImg.png"
-              item={{
-                name: "noodle",
-                name2: "pizza",
-                name3: "burger",
-              }}
-            />
-            <FoodSelect
-              img="/foodSelectImg2.png"
-              item={{
-                name: "food",
-                name2: "drink",
-              }}
-            />
+            <FoodBtn selected={selected} onSelect={setSelected} />
             <NewBtn />
           </div>
         </div>
 
-        {foods ? (
+        {!isLoading ? (
           searchValue.length > 0 ? (
             filteredFoods.length > 0 ? (
               <FoodsMap data={filteredFoods} />
@@ -89,7 +74,7 @@ export default function Foods() {
               </h1>
             )
           ) : (
-            <FoodsMap data={foods} />
+            <FoodsMap data={foods} refetch={refetch} selected={selected} />
           )
         ) : (
           <FoodMapSkeleton count={3} />

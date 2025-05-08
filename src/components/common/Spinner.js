@@ -1,5 +1,3 @@
-import "@/styles/Home.module.css";
-
 export default function Spinner() {
   return (
     <div style={styles.overlay}>

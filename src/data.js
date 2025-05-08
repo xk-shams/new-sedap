@@ -319,30 +319,67 @@ export const customerListData = [
 export const foodData = [
   {
     id: "1",
-    cotegoriya: "Food",
+    category: "Food",
     type: "Burger",
-    prize: 100,
+    price: 200,
     name: "Burger Jumbo Special With Spicy",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
   {
     id: "2",
-    cotegoriya: "Food",
-    prize: 100,
-    type: "pizza",
+    category: "Food",
+    price: 100,
+    type: "Pizza",
     name: "Pizza la Piazza Special Nuggets",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
   {
     id: "3",
-    cotegoriya: "Food",
-    prize: 100,
+    category: "Food",
+    price: 400,
     type: "Noodle",
     name: "Spicy Mozarella with Barbeque",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
   {
     id: "4",
-    cotegoriya: "Drink",
+    category: "Drink",
     type: "Sprite",
-    prize: 100,
+    price: 300,
     name: "Sprite Flavour with Avocado Juice",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
+  },
+  {
+    id: "4",
+    category: "Drink",
+    type: "Sprite",
+    price: 300,
+    name: "Sprite Flavour with Avocado Juice",
+    ingredients:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    nutritionInfo:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    comment:
+      "Pepperoni pitsasi (20 cm), qarsildoq kartoshka fri va ishtahaochar stripslar (3 ta) – shunchalar mazaliki, beixtiyor yana deb yuborasiz!",
   },
 ];

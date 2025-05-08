@@ -1,7 +1,6 @@
 import Head from "next/head";
 import OrdersList from "@/components/pages/orders/OrdersList";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import styles from "@/styles/Home.module.css";
 
 export default function Orders() {
   return (

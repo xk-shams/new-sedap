@@ -1,5 +1,4 @@
 import React from "react";
-import { foodData } from "@/data";
 import Variants from "@/components/pages/foods/Skeleton";
 
 function FoodMapSkeleton() {
@@ -10,11 +9,12 @@ function FoodMapSkeleton() {
         alignItems: "center",
         flexWrap: "wrap",
         gap: "20px",
+        marginTop: "130px",
       }}
     >
-      {foodData.map(() => {
-        return <Variants />;
-      })}
+      {/* {items.map((food) => {
+        return <Variants key={food.id} />;
+      })} */}
     </div>
   );
 }

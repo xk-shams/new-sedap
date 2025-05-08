@@ -1,153 +1,132 @@
 import * as React from "react";
-import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
+import { Box, Skeleton, Stack } from "@mui/material";
 
 export default function Variants() {
   return (
-    <Stack
-      spacing={1}
-      sx={{
-        minHeight: "433px",
-        maxHeight: "433px",
+    <div
+      style={{
         maxWidth: "276px",
-        minWidth: "276px",
-        position: "relative",
+        maxHeight: "360px",
+        minHeight: "360px",
+        width: "360px",
+        backgroundColor: "#FFFFFF",
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
+        flexDirection: "column",
+        padding: "0px 30px 30px 30px",
+        borderRadius: "14px",
       }}
     >
-      <Skeleton
-        variant="circular"
-        sx={{
-          maxWidth: "276px",
-          minWidth: "276px",
-          maxHeight: "360px",
-          minHeight: "360px",
-          backgroundColor: "white",
-          bottom: "16px",
-          borderRadius: "14px",
-          position: "absolute",
-        }}
-      ></Skeleton>
-      <Skeleton
-        variant="circular"
-        sx={{
-          maxWidth: "194px",
-          maxHeight: "194px",
-          fontSize: "11rem",
-          width: "100%",
-        }}
-      />
-      {/* For variant="text", adjust the height via font-size */}
-      {/* For other variants, adjust the size with `width` and `height` */}
-      <Skeleton
-        variant="text"
-        width={200}
-        height={80}
-        sx={{
-          marginTop: "20px !important",
-        }}
-      />
-      <Skeleton
-        variant="text"
-        width={71}
-        height={25}
-        sx={{
-          marginTop: "-7px !important",
-          marginBottom: "7px !important",
-        }}
-      />
-
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "20px",
-          justifyContent: "center",
+          maxWidth: "194px",
+          minWidth: "194px",
+          maxHeight: "194px",
+          minHeight: "194px",
+          marginBottom: "42px",
+          marginTop: "-74px",
         }}
       >
+        <Skeleton
+          variant="circular"
+          width={194}
+          height={194}
+          sx={{ boxShadow: "11px 13px 17px 0px #00000026" }}
+        />
+      </div>
+
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <Skeleton
+          variant="text"
+          width={194}
+          height={28}
+          style={{ margin: "0 auto 8px auto" }}
+        />
+        <Skeleton
+          variant="text"
+          width={160}
+          height={28}
+          style={{ margin: "-10px auto 10px auto" }}
+        />
+
+        <Skeleton
+          variant="text"
+          width={100}
+          height={20}
+          style={{ margin: "0 auto 22px auto" }}
+        />
+
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            flexDirection: "column",
+            gap: "20px",
+            justifyContent: "center",
+            marginTop: "25px",
           }}
         >
-          <Skeleton
-            variant="rounded"
-            width={35}
-            height={35}
-            sx={{ borderRadius: "12px" }}
-          />
-          <Skeleton
-            variant="text"
-            width={25}
-            height={12}
-            sx={{ marginTop: "10px" }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Skeleton
-            variant="rounded"
-            width={35}
-            height={35}
-            sx={{ borderRadius: "12px" }}
-          />
-          <Skeleton
-            variant="text"
-            width={25}
-            height={12}
-            sx={{ marginTop: "10px" }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Skeleton
-            variant="rounded"
-            width={35}
-            height={35}
-            sx={{ borderRadius: "12px" }}
-          />
-          <Skeleton
-            variant="text"
-            width={25}
-            height={12}
-            sx={{ marginTop: "10px" }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Skeleton
-            variant="rounded"
-            width={35}
-            height={35}
-            sx={{ borderRadius: "12px" }}
-          />
-          <Skeleton
-            variant="text"
-            width={25}
-            height={12}
-            sx={{ marginTop: "10px" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Skeleton
+              sx={{ borderRadius: "12px", marginBottom: "7px" }}
+              variant="rounded"
+              width={36}
+              height={36}
+            />
+            <Skeleton variant="text" width={32} height={14} />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Skeleton
+              sx={{ borderRadius: "12px", marginBottom: "7px" }}
+              variant="rounded"
+              width={36}
+              height={36}
+            />
+            <Skeleton variant="text" width={32} height={14} />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Skeleton
+              sx={{ borderRadius: "12px", marginBottom: "7px" }}
+              variant="rounded"
+              width={36}
+              height={36}
+            />
+            <Skeleton variant="text" width={32} height={14} />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Skeleton
+              sx={{ borderRadius: "12px", marginBottom: "7px" }}
+              variant="rounded"
+              width={36}
+              height={36}
+            />
+            <Skeleton variant="text" width={32} height={14} />
+          </div>
         </div>
       </div>
-    </Stack>
+    </div>
   );
 }
