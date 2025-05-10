@@ -74,7 +74,10 @@ function FoodForm({ title, food, btnText }) {
         },
         body: JSON.stringify(values),
       };
-      fetch(`http://localhost:1337/api/foods/${formData.documentId}`, options)
+      fetch(
+        `http://192.168.100.108:1337/api/foods/${formData.documentId}`,
+        options
+      )
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -90,7 +93,7 @@ function FoodForm({ title, food, btnText }) {
         },
         body: JSON.stringify(values),
       };
-      fetch("http://localhost:1337/api/foods", options)
+      fetch("http://192.168.100.108:1337/api/foods", options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
