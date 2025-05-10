@@ -1,8 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import SearchBtn from "./SearchBtn";
+import { useRouter } from "next/router";
 
 function Search() {
+  const router = useRouter();
+  let user = null;
+  if (typeof window !== "undefined") {
+    user = localStorage.getItem("user");
+    user = user ? JSON.parse(user) : null;
+  }
+
+  console.log(user);
   const btnArr = [
     {
       id: 1,
@@ -29,6 +38,13 @@ function Search() {
       back: "#FF5B5B26",
     },
   ];
+
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("jwt");
+    router.replace("/login");
+  };
+
   return (
     <div
       style={{
@@ -77,12 +93,7 @@ function Search() {
 
       <div>
         {btnArr.map((item) => (
-          <SearchBtn
-            key={item.id}
-            img={item.img}
-            num={item.num}
-            back={item.back}
-          />
+          <SearchBtn key={item.id} img={item.img} num={item.num} back={item.back} />
         ))}
       </div>
       <hr
@@ -100,7 +111,7 @@ function Search() {
           gap: "20px",
         }}
       >
-        <h3>Hello, Samantha</h3>
+        <h3>Hello, {user?.username}</h3>
         <button
           style={{
             background: "#c4c4c4",
@@ -109,6 +120,17 @@ function Search() {
             borderRadius: "50%",
           }}
         ></button>
+        <button
+          onClick={handleLogOut}
+          style={{
+            background: "#c4c4c4",
+            border: "4px solid #ffffff",
+            padding: "25px",
+            borderRadius: "50%",
+          }}
+        >
+          Log out
+        </button>
       </div>
     </div>
   );

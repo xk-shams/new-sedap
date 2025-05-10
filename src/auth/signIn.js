@@ -1,11 +1,12 @@
-import axios from "axios";
+import { axiosInstance } from "@/utils/axiosInstance";
 
 export default async function signIn(param, data) {
   const { email, password } = data;
   try {
     // Request API.
-    const data = await axios
-      .post("http://192.168.100.108:1337/api/auth/local", {
+    // fetch
+    const data = await axiosInstance
+      .post("/auth/local", {
         identifier: email,
         password: password,
       })

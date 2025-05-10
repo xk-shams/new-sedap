@@ -22,19 +22,33 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      // API call simulation
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      router.push("/dashboard");
-    } catch (err) {
-      setError(err.message || "Kirishda xatolik yuz berdi");
-    } finally {
-      setLoading(false);
-    }
-  };
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    // const formData = new FormData(event.currentTarget);
+    // const email = formData.get("email");
+    // const password = formData.get("password");
+
+    // const response = await fetch("/api/auth/login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ email, password }),
+    // });
+
+    // if (response.ok) {
+    // const res = await response.json();
+    // const { user, jwt } = res.body;
+    const user = {
+      id: "23",
+      userName: "ttes",
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+    // localStorage.setItem("jwt", jwt);
+    router.push("/dashboard");
+    // } else {
+    //   // Handle errors
+    // }
+  }
 
   return (
     <AuthLayout title="Tizimga kirish">
