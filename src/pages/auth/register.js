@@ -44,7 +44,7 @@ export default function RegisterPage() {
 
   const handleAvatarUrlChange = (e) => {
     setAvatarUrl(e.target.value);
-    setAvatar(e.target.value); // URL to'g'ridan-to'g'ri avatar sifatida qo'llanadi
+    setAvatar(e.target.value);
   };
 
   const handleSubmit = async (e) => {
