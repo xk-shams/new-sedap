@@ -2,9 +2,13 @@ import React from "react";
 import Image from "next/image";
 import SearchBtn from "./SearchBtn";
 import { useRouter } from "next/router";
+import { Button, useMediaQuery } from "@mui/material";
+import UserMenu from "./UserManu";
 
 function Search() {
   const router = useRouter();
+  const isXLargeScreen = useMediaQuery("(min-width:1800px)");
+
   let user = null;
   if (typeof window !== "undefined") {
     user = localStorage.getItem("user");
@@ -42,7 +46,7 @@ function Search() {
   const handleLogOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("jwt");
-    router.replace("/login");
+    router.replace("/auth/login");
   };
 
   return (
@@ -50,7 +54,7 @@ function Search() {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        gap: "25px",
         width: "100%",
         marginBottom: "40px",
       }}
@@ -91,11 +95,19 @@ function Search() {
         />
       </div>
 
-      <div>
-        {btnArr.map((item) => (
-          <SearchBtn key={item.id} img={item.img} num={item.num} back={item.back} />
-        ))}
-      </div>
+      {isXLargeScreen && (
+        <div>
+          {btnArr.map((item) => (
+            <SearchBtn
+              key={item.id}
+              img={item.img}
+              num={item.num}
+              back={item.back}
+            />
+          ))}
+        </div>
+      )}
+
       <hr
         style={{
           width: "1px",
@@ -111,26 +123,32 @@ function Search() {
           gap: "20px",
         }}
       >
-        <h3>Hello, {user?.username}</h3>
-        <button
+        <h3
           style={{
-            background: "#c4c4c4",
-            border: "4px solid #ffffff",
-            padding: "25px",
-            borderRadius: "50%",
-          }}
-        ></button>
-        <button
-          onClick={handleLogOut}
-          style={{
-            background: "#c4c4c4",
-            border: "4px solid #ffffff",
-            padding: "25px",
-            borderRadius: "50%",
+            fontWeight: "600",
+            fontSize: "16px",
+            lineHeight: "100%",
           }}
         >
-          Log out
-        </button>
+          <span
+            style={{
+              fontWeight: "400",
+            }}
+          >
+            Hello
+          </span>
+          , {user?.name}
+        </h3>
+        <UserMenu
+          logOut={handleLogOut}
+          avatar={user?.avatar}
+          style={{
+            background: "#c4c4c4",
+            border: "4px solid #ffffff",
+            padding: "27px 20px",
+            borderRadius: "50%",
+          }}
+        ></UserMenu>
       </div>
     </div>
   );

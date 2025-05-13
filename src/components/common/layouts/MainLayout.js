@@ -11,7 +11,7 @@ function MainLayout(props) {
     if (typeof window !== "undefined") {
       const testUser = localStorage.getItem("user");
       if (!testUser) {
-        router.push("/login");
+        router.push("/auth/login");
       }
     }
   }, [router]);
