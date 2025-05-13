@@ -18,40 +18,37 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import AuthLayout from "../../components/AuthLayout";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const router = useRouter();
+  const [email, setEmail] = useState(router.query?.email ?? "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  console.log("router", router);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    // const formData = new FormData(event.currentTarget);
-    // const email = formData.get("email");
-    // const password = formData.get("password");
+    const formData = new FormData(event.currentTarget); // { get: (attrName) => { return form[attrName] } }
+    const email = formData.get("email"); // 'test@mail.com'
+    const password = formData.get("password"); // 'errer3r3r3'
 
-    // const response = await fetch("/api/auth/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email, password }),
-    // });
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-    // if (response.ok) {
-    // const res = await response.json();
-    // const { user, jwt } = res.body;
-    const user = {
-      id: "1",
-      userName: "Javohir",
-    };
-    localStorage.setItem("user", JSON.stringify(user));
-    // localStorage.setItem("jwt", jwt);
-    router.push("/dashboard");
-
-    // } else {
-    //   // Handle errors
-    // }
+    if (response.ok) {
+      const res = await response.json();
+      const { user, jwt } = res.body;
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("jwt", jwt);
+      router.push("/dashboard");
+    } else {
+      // console.log('res err', response.body.error)
+      // Handle errors
+    }
   }
 
   return (
@@ -85,7 +82,6 @@ export default function LoginPage() {
           fullWidth
           name="password"
           label="Parol"
-          type="password"
           id="password"
           autoComplete="current-password"
           value={password}

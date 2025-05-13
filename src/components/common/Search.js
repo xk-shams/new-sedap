@@ -98,12 +98,7 @@ function Search() {
       {isXLargeScreen && (
         <div>
           {btnArr.map((item) => (
-            <SearchBtn
-              key={item.id}
-              img={item.img}
-              num={item.num}
-              back={item.back}
-            />
+            <SearchBtn key={item.id} img={item.img} num={item.num} back={item.back} />
           ))}
         </div>
       )}
@@ -137,7 +132,7 @@ function Search() {
           >
             Hello
           </span>
-          , {user?.name}
+          , {user?.username}
         </h3>
         <UserMenu
           logOut={handleLogOut}

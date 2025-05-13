@@ -19,8 +19,7 @@ import AuthLayout from "../../components/AuthLayout";
 export default function RegisterPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    name: "",
-    lastName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -50,24 +49,40 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (form.password !== form.confirmPassword) {
-      setError("Parollar mos emas");
-      return;
+    // if (form.password !== form.confirmPassword) {
+    //   setError("Parollar mos emas");
+    //   return;
+    // }
+    const formData = new FormData(e.currentTarget);
+    const username = formData.get("username"); // 'username'
+    const email = formData.get("email"); // 'test@mail.com'
+    const password = formData.get("password"); // 'errer3r3r3'
+
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, username }),
+    });
+
+    // const user = {
+    //   id: Date.now().toString(),
+    //   name: form.name,
+    //   lastName: form.lastName,
+    //   email: form.email,
+    //   avatar:
+    //     avatar ||
+    //     "https://avatars.mds.yandex.net/i?id=d2161fd91a435a4528b4bdca7ab9a1149873d046-5847755-images-thumbs&n=13",
+    //   createdAt: new Date().toISOString().split("T")[0],
+    // };
+    if (response.ok) {
+      const res = await response.json();
+      console.log("res", res);
+      const { user, jwt } = res.body;
+      router.push(`/auth/login?email=${user.email}`);
+    } else {
+      // console.log('res err', response.body.error)
+      // Handle errors
     }
-
-    const user = {
-      id: Date.now().toString(),
-      name: form.name,
-      lastName: form.lastName,
-      email: form.email,
-      avatar:
-        avatar ||
-        "https://avatars.mds.yandex.net/i?id=d2161fd91a435a4528b4bdca7ab9a1149873d046-5847755-images-thumbs&n=13",
-      createdAt: new Date().toISOString().split("T")[0],
-    };
-
-    localStorage.setItem("user", JSON.stringify(user));
-    router.push("/dashboard");
   };
 
   return (
@@ -82,12 +97,7 @@ export default function RegisterPage() {
         {!avatar && <LockOutlinedIcon />}
       </Avatar>
 
-      <Stack
-        direction="row"
-        spacing={2}
-        alignItems="center"
-        sx={{ mb: 2, mt: 2 }}
-      >
+      <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2, mt: 2 }}>
         <TextField
           label="Avatar URL"
           variant="outlined"
@@ -122,11 +132,11 @@ export default function RegisterPage() {
           margin="normal"
           required
           label="Ism"
-          name="name"
-          value={form.name}
+          name="username"
+          value={form.username}
           onChange={handleChange}
         />
-        <TextField
+        {/* <TextField
           fullWidth
           margin="normal"
           required
@@ -134,7 +144,7 @@ export default function RegisterPage() {
           name="lastName"
           value={form.lastName}
           onChange={handleChange}
-        />
+        /> */}
         <TextField
           fullWidth
           margin="normal"
@@ -151,11 +161,10 @@ export default function RegisterPage() {
           required
           label="Parol"
           name="password"
-          type="password"
           value={form.password}
           onChange={handleChange}
         />
-        <TextField
+        {/* <TextField
           fullWidth
           margin="normal"
           required
@@ -164,14 +173,9 @@ export default function RegisterPage() {
           type="password"
           value={form.confirmPassword}
           onChange={handleChange}
-        />
+        /> */}
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
+        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
           Ro'yxatdan o'tish
         </Button>
 
