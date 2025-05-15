@@ -16,6 +16,12 @@ export default function Foods() {
   const [filteredFoods, setFilteredFoods] = useState([]);
   const [selected, setSelected] = useState("left");
 
+  let user = null;
+  if (typeof window !== "undefined") {
+    user = localStorage.getItem("user");
+    user = user ? JSON.parse(user) : null;
+  }
+
   // useEffect(() => {
   //   if (foods && searchValue.length > 0) {
   //     const filtered = foods.filter((item) =>
@@ -29,8 +35,16 @@ export default function Foods() {
 
   // populate[type][populate][0]=category
 
+  const [restaurants, isresLoading, refetchres] = useFetchApiItems(
+    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
+  );
+
+  const foundRestaurant = restaurants[0] ?? null;
+
+  console.log("foundRestaurant", foundRestaurant);
+
   const [foods, isLoading, refetch] = useFetchApiItems(
-    "/foods?populate[type][populate][0]=category"
+    `/foods?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}&populate[type][populate][0]=category`
   );
 
   return (
@@ -60,7 +74,7 @@ export default function Foods() {
           </div>
         </div>
 
-        {!isLoading ? (
+        {!isLoading && foundRestaurant ? (
           searchValue.length > 0 ? (
             filteredFoods.length > 0 ? (
               <FoodsMap data={filteredFoods} />

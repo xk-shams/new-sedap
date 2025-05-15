@@ -55,6 +55,7 @@ function FoodForm({ title, food, btnText }) {
 
     const values = {
       data: {
+        // restaurant: restaurant.documentId,
         name: formData.name,
         image: formData.image,
         price: formData.price,
@@ -74,10 +75,7 @@ function FoodForm({ title, food, btnText }) {
         },
         body: JSON.stringify(values),
       };
-      fetch(
-        `http://192.168.100.108:1337/api/foods/${formData.documentId}`,
-        options
-      )
+      fetch(`http://192.168.100.108:1337/api/foods/${formData.documentId}`, options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
