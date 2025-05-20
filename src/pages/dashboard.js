@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   let user = null;
@@ -10,11 +11,47 @@ export default function Dashboard() {
     user = user ? JSON.parse(user) : null;
   }
 
-  const [restaurants, isresLoading, refetchres] = useFetchApiItems(
-    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
-  );
+  const [restaurants, isresLoading, refetchres] = useFetchApiItems("/restaurants", {
+    filters: {
+      key: "users",
+      users: {
+        documentId: user?.documentId,
+      },
+    },
+  });
+
+  filtersTest = [
+    {
+      key: "[restaurant][documentId]",
+      operator: "[$eqi]",
+      value: foundRestaurant?.documentId,
+      required: true,
+    },
+    {
+      key: "[name]",
+      operator: "[$containsi]",
+      value: "hello",
+      required: false,
+    },
+  ]`/categories?filters${filtersTest.key}${filtersTest.operator}=${filtersTest.value}`;
+
+  const data1 = filtersTest
+    .map((filter) => {
+      return filter.key + filter.operator + "=" + filter.value;
+    })
+    .join("&");
 
   const foundRestaurant = restaurants[0] ?? null;
+
+  const [categories, isLoading, fetcher, realRefetch] = useFetchApiItems();
+
+  useEffect(() => {
+    if (foundRestaurant?.documentId) {
+      realRefetch(
+        `/categories?filters[restaurant][documentId][$eqi]=${foundRestaurant.documentId}`
+      );
+    }
+  }, [foundRestaurant]);
 
   const handleCreateCategory = (res) => {
     if (res.documentId) {
@@ -43,10 +80,6 @@ export default function Dashboard() {
         .catch((error) => console.error(error));
     }
   };
-
-  const [categories, isLoading] = useFetchApiItems(
-    `/categories?filters[restaurant][documentId][$eq]=${foundRestaurant?.documentId}`
-  );
 
   const handleCreateType = (cats) => {
     const firstCat = cats[1] ?? null;
@@ -78,12 +111,8 @@ export default function Dashboard() {
     <>
       <Head />
       <div>
-        <button onClick={() => handleCreateCategory(foundRestaurant)}>
-          Create Category
-        </button>
-        <button onClick={() => handleCreateType(categories)}>
-          Create type
-        </button>
+        <button onClick={() => handleCreateCategory(foundRestaurant)}>Create Category</button>
+        <button onClick={() => handleCreateType(categories)}>Create type</button>
         <Image src="/dashboard.png" width={1460} height={1544} alt="back" />
       </div>
     </>
