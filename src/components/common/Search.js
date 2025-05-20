@@ -1,46 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import SearchBtn from "./SearchBtn";
 import { useRouter } from "next/router";
-import { Button, useMediaQuery } from "@mui/material";
-import UserMenu from "./UserManu";
+import { useMediaQuery } from "@mui/material";
+import UserMenu from "@/components/common/UserManu";
 
 function Search() {
   const router = useRouter();
   const isXLargeScreen = useMediaQuery("(min-width:1800px)");
+  const [user, setUser] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
 
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const raw = localStorage.getItem("user");
+        const parsed = raw && raw !== "undefined" ? JSON.parse(raw) : null;
+        setUser(parsed);
+      } catch (e) {
+        console.error("JSON parse error:", e);
+      }
+    }
+  }, []);
 
-  console.log(user);
   const btnArr = [
-    {
-      id: 1,
-      img: "/search.png",
-      num: 2,
-      back: "#2D9CDB26",
-    },
-    {
-      id: 2,
-      img: "/search2.png",
-      num: 7,
-      back: "#2D9CDB26",
-    },
-    {
-      id: 3,
-      img: "/search3.png",
-      num: 1,
-      back: "#5E6C9326",
-    },
-    {
-      id: 4,
-      img: "/search4.png",
-      num: 3,
-      back: "#FF5B5B26",
-    },
+    { id: 1, img: "/search.png", num: 2, back: "#2D9CDB26" },
+    { id: 2, img: "/search2.png", num: 7, back: "#2D9CDB26" },
+    { id: 3, img: "/search3.png", num: 1, back: "#5E6C9326" },
+    { id: 4, img: "/search4.png", num: 3, back: "#FF5B5B26" },
   ];
 
   const handleLogOut = () => {
@@ -71,6 +58,9 @@ function Search() {
         }}
       >
         <input
+          type="text"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
           placeholder="Search here"
           style={{
             width: "100%",
@@ -79,11 +69,12 @@ function Search() {
             padding: "15px 28px",
             fontWeight: 400,
             fontSize: "16px",
+            outline: "none",
           }}
         />
         <Image
           src="/searchLogo.png"
-          alt="d"
+          alt="Search Icon"
           width={24}
           height={24}
           style={{
@@ -96,9 +87,14 @@ function Search() {
       </div>
 
       {isXLargeScreen && (
-        <div>
+        <div style={{ display: "flex", gap: "10px" }}>
           {btnArr.map((item) => (
-            <SearchBtn key={item.id} img={item.img} num={item.num} back={item.back} />
+            <SearchBtn
+              key={item.id}
+              img={item.img}
+              num={item.num}
+              back={item.back}
+            />
           ))}
         </div>
       )}
@@ -111,29 +107,12 @@ function Search() {
           background: "#d0d6de",
         }}
       />
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "20px",
-        }}
-      >
-        <h3
-          style={{
-            fontWeight: "600",
-            fontSize: "16px",
-            lineHeight: "100%",
-          }}
-        >
-          <span
-            style={{
-              fontWeight: "400",
-            }}
-          >
-            Hello
-          </span>
-          , {user?.username}
+
+      <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        <h3 style={{ fontWeight: "600", fontSize: "16px", lineHeight: "100%" }}>
+          <span style={{ fontWeight: "400" }}>Hello</span>, {user?.username}
         </h3>
+
         <UserMenu
           logOut={handleLogOut}
           avatar={user?.avatar}
@@ -143,7 +122,7 @@ function Search() {
             padding: "27px 20px",
             borderRadius: "50%",
           }}
-        ></UserMenu>
+        />
       </div>
     </div>
   );

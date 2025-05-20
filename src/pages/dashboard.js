@@ -23,7 +23,7 @@ export default function Dashboard() {
         data: {
           name: "Burger",
           description: "Burger desc",
-          internalName: "AbrorRes_Burger",
+          internalName: "OlimjonRes_Burger",
           restaurant: res.documentId, // res.documentId
         },
       };
@@ -53,7 +53,7 @@ export default function Dashboard() {
     if (firstCat) {
       const values = {
         data: {
-          name: "Osh",
+          name: "ilik shorva",
           category: firstCat.documentId, // res.documentId
         },
       };
@@ -78,8 +78,12 @@ export default function Dashboard() {
     <>
       <Head />
       <div>
-        <button onClick={() => handleCreateCategory(foundRestaurant)}>Create Category</button>
-        <button onClick={() => handleCreateType(categories)}>Create type</button>
+        <button onClick={() => handleCreateCategory(foundRestaurant)}>
+          Create Category
+        </button>
+        <button onClick={() => handleCreateType(categories)}>
+          Create type
+        </button>
         <Image src="/dashboard.png" width={1460} height={1544} alt="back" />
       </div>
     </>
