@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import {
   CiBank,
+  CiCircleList,
   CiChat1,
   CiWallet,
   CiCalendar,
@@ -54,6 +55,12 @@ function Navigation(props) {
       linkName: "Foods",
       icon: CiForkAndKnife,
       href: "/foods",
+    },
+    {
+      id: 7,
+      linkName: "Categories",
+      icon: CiCircleList,
+      href: "/categories",
     },
     {
       id: 10,

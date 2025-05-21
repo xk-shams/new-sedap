@@ -3,11 +3,11 @@ import MainLayout from "@/components/common/layouts/MainLayout";
 import Head from "next/head";
 import FoodForm from "@/components/pages/foods/FoodForm";
 import { useRouter } from "next/router";
-import useFetchApiItem from "@/hooks/useFetchApiItem";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 export default function FoodEdit() {
   const router = useRouter();
-  const [food, isLoading] = useFetchApiItem(
+  const [food, isLoading] = useFetchApiItems(
     `/foods/${router.query.documentId}?populate[type][populate][0]=category`
   );
 

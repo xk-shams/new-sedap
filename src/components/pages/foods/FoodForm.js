@@ -57,10 +57,13 @@ function FoodForm({ title, food, btnText }) {
   };
 
   const [categories, isLoading] = useFetchApiItems(
-    `/categories?filters[restaurant][documentId][$eq]=${foundRestaurant?.documentId}`
+    foundRestaurant
+      ? `/categories?filters[restaurant][documentId][$eq]=${foundRestaurant.documentId}`
+      : null
   );
+
   const [types, typesLoading] = useFetchApiItems(
-    `/types?filters[category][documentId][$eq]=${category}`
+    category ? `/types?filters[category][documentId][$eq]=${category}` : null
   );
 
   const handleSubmit = (e) => {
@@ -90,7 +93,10 @@ function FoodForm({ title, food, btnText }) {
         },
         body: JSON.stringify(values),
       };
-      fetch(`http://192.168.100.84:1337/api/foods/${formData.documentId}`, options)
+      fetch(
+        `http://192.168.100.84:1337/api/foods/${formData.documentId}`,
+        options
+      )
         .then((response) => response.json())
         .then((res) => {
           console.log(res);

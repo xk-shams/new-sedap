@@ -13,8 +13,14 @@ import {
   Alert,
   Box,
   Snackbar,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import AuthLayout from "../../components/AuthLayout";
 
 export default function LoginPage() {
@@ -51,6 +57,18 @@ export default function LoginPage() {
     }
   }
 
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <AuthLayout title="Tizimga kirish">
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -76,17 +94,33 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Parol"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+
+        <FormControl margin="normal" required fullWidth variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Parol</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            name="password" // <-- kerakli joy
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    showPassword ? "hide the password" : "display the password"
+                  }
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  onMouseUp={handleMouseUpPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Parol"
+          />
+        </FormControl>
 
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}

@@ -3,15 +3,19 @@ import {
   Avatar,
   Button,
   TextField,
+  Alert,
   Grid,
   Box,
-  Typography,
-  Alert,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
   IconButton,
   Stack,
 } from "@mui/material";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import AuthLayout from "../../components/AuthLayout";
@@ -24,6 +28,19 @@ export default function RegisterPage() {
     password: "",
     confirmPassword: "",
   });
+  // password
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (event) => {
+    event.preventDefault();
+  };
+  // password
 
   const [avatar, setAvatar] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
@@ -97,7 +114,12 @@ export default function RegisterPage() {
         {!avatar && <LockOutlinedIcon />}
       </Avatar>
 
-      <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2, mt: 2 }}>
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        sx={{ mb: 2, mt: 2 }}
+      >
         <TextField
           label="Avatar URL"
           variant="outlined"
@@ -155,7 +177,8 @@ export default function RegisterPage() {
           value={form.email}
           onChange={handleChange}
         />
-        <TextField
+
+        <FormControl
           fullWidth
           margin="normal"
           required
@@ -163,7 +186,29 @@ export default function RegisterPage() {
           name="password"
           value={form.password}
           onChange={handleChange}
-        />
+        >
+          <InputLabel htmlFor="outlined-adornment-password">Parol</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    showPassword ? "hide the password" : "display the password"
+                  }
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  onMouseUp={handleMouseUpPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
         {/* <TextField
           fullWidth
           margin="normal"
@@ -175,7 +220,12 @@ export default function RegisterPage() {
           onChange={handleChange}
         /> */}
 
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
           Ro'yxatdan o'tish
         </Button>
 

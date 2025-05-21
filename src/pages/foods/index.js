@@ -9,7 +9,6 @@ import FoodSearch from "@/components/pages/foods/FoodSearch";
 import FoodBtn from "@/components/pages/foods/FoodBtn";
 import NewBtn from "@/components/pages/foods/NewBtn";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
-import { CiGrid41, CiServer } from "react-icons/ci";
 
 export default function Foods() {
   const [searchValue, setSearchValue] = useState("");
@@ -29,14 +28,37 @@ export default function Foods() {
 
   // populate[type][populate][0]=category
 
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
+  const [user, setUser] = useState(null);
+  console.log("sssssssssssssss", user);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  }, []);
+
+  // eski
+
+  // const [restaurants, isresLoading, refetchres] = useFetchApiItems(
+  //   user
+  //     ? `/restaurants?filters[users][documentId][$eqi]=${user.documentId}`
+  //     : null
+  // );
+
+  // yangi
 
   const [restaurants, isresLoading, refetchres] = useFetchApiItems(
-    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
+    "/restaurants",
+    user && {
+      filters: {
+        users: {
+          documentId: user.documentId,
+        },
+        key: "users",
+      },
+    }
   );
 
   const foundRestaurant = restaurants[0] ?? null;
@@ -52,7 +74,20 @@ export default function Foods() {
   console.log("foundRestaurant", foundRestaurant);
 
   const [foods, isLoading, refetch] = useFetchApiItems(
-    `/foods?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}&populate[type][populate][0]=category`
+    "/foods",
+    foundRestaurant && {
+      filters: {
+        restaurant: {
+          documentId: foundRestaurant.documentId,
+        },
+        key: "restaurant", // bu filterKey uchun kerak
+      },
+      populate: {
+        type: {
+          populate: ["category"],
+        },
+      },
+    }
   );
 
   useEffect(() => {
@@ -74,7 +109,10 @@ export default function Foods() {
             justifyContent: "space-between",
           }}
         >
-          <PageTitle title="Foods" subtitle="Here is your menus summary with graph view" />
+          <PageTitle
+            title="Foods"
+            subtitle="Here is your menus summary with graph view"
+          />
           <div
             style={{
               display: "flex",

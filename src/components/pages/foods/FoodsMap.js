@@ -20,7 +20,7 @@ function FoodsMap({ selected, data, refetch }) {
 
   const handleDelete = (foodId) => {
     if (foodId) {
-      fetch(`http://192.168.100.108:1337/api/foods/${foodId}`, {
+      fetch(`http://192.168.100.84:1337/api/foods/${foodId}`, {
         method: "DELETE",
       })
         .then((res) => {
@@ -44,8 +44,12 @@ function FoodsMap({ selected, data, refetch }) {
       style={{
         display: "flex",
         alignItems: "center",
-        ...(selected === "left" ? { flexWrap: "wrap" } : { flexDirection: "column" }),
-        ...(selected === "left" ? { marginTop: "130px" } : { marginTop: "50px" }),
+        ...(selected === "left"
+          ? { flexWrap: "wrap" }
+          : { flexDirection: "column" }),
+        ...(selected === "left"
+          ? { marginTop: "130px" }
+          : { marginTop: "50px" }),
         gap: "20px",
       }}
     >
@@ -138,7 +142,9 @@ function FoodsMap({ selected, data, refetch }) {
                       onClick={() => router.push(`/foods/${food.documentId}`)}
                     />
                     <CustomBtnFood
-                      onClick={() => router.push(`/foods/${food.documentId}/edit`)}
+                      onClick={() =>
+                        router.push(`/foods/${food.documentId}/edit`)
+                      }
                       back="#FF5B5B26"
                       img="/foodIcon2.png"
                       text="Edit"
@@ -156,7 +162,9 @@ function FoodsMap({ selected, data, refetch }) {
                     />
                     <CustomBtnFood
                       onClick={() =>
-                        router.push(`/foods/new?name=${food.name}&price=${food.price}`)
+                        router.push(
+                          `/foods/new?name=${food.name}&price=${food.price}`
+                        )
                       }
                       back="#5E6C9326"
                       img="/foodIcon4.png"

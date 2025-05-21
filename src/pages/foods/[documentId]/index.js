@@ -6,11 +6,11 @@ import FoodSearch from "@/components/pages/foods/FoodSearch";
 import NewBtn from "@/components/pages/foods/NewBtn";
 import { useRouter } from "next/router";
 import FoodDetailComponent from "@/components/pages/foods/FoodDetailComponent";
-import useFetchApiItem from "@/hooks/useFetchApiItem";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 export default function FoodDetail() {
   const router = useRouter();
-  const [food, isLoading] = useFetchApiItem(
+  const [food, isLoading] = useFetchApiItems(
     `/foods/${router.query.documentId}?populate[type][populate][0]=category`
   );
 
@@ -34,7 +34,10 @@ export default function FoodDetail() {
             justifyContent: "space-between",
           }}
         >
-          <PageTitle title="Foods" subtitle="Here is your menus summary with graph view" />
+          <PageTitle
+            title="Foods"
+            subtitle="Here is your menus summary with graph view"
+          />
           <div
             style={{
               display: "flex",
