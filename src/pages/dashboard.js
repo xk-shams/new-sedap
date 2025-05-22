@@ -3,24 +3,25 @@ import Image from "next/image";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useEffect } from "react";
+import useCurrent from "@/hooks/useCurrent";
 
 export default function Dashboard() {
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
-
-  const [restaurants, isresLoading, refetchres] = useFetchApiItems("/restaurants", {
-    filters: {
-      key: "users",
-      users: {
-        documentId: user?.documentId,
+  const user = useCurrent();
+  const [restaurants, isresLoading, refetchres] = useFetchApiItems(
+    "/restaurants",
+    {
+      filters: {
+        key: "users",
+        users: {
+          documentId: user?.documentId,
+        },
       },
-    },
-  });
+    }
+  );
 
-  filtersTest = [
+  const foundRestaurant = restaurants[0] ?? null;
+
+  const filtersTest = [
     {
       key: "[restaurant][documentId]",
       operator: "[$eqi]",
@@ -33,15 +34,13 @@ export default function Dashboard() {
       value: "hello",
       required: false,
     },
-  ]`/categories?filters${filtersTest.key}${filtersTest.operator}=${filtersTest.value}`;
+  ];
 
   const data1 = filtersTest
     .map((filter) => {
       return filter.key + filter.operator + "=" + filter.value;
     })
     .join("&");
-
-  const foundRestaurant = restaurants[0] ?? null;
 
   const [categories, isLoading, fetcher, realRefetch] = useFetchApiItems();
 
@@ -72,7 +71,7 @@ export default function Dashboard() {
         },
         body: JSON.stringify(values),
       };
-      fetch("http://192.168.100.84:1337/api/categories", options)
+      fetch("http://192.168.100.113:1337/api/categories", options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -98,7 +97,7 @@ export default function Dashboard() {
         },
         body: JSON.stringify(values),
       };
-      fetch("http://192.168.100.84:1337/api/types", options)
+      fetch("http://192.168.100.113:1337/api/types", options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -111,8 +110,12 @@ export default function Dashboard() {
     <>
       <Head />
       <div>
-        <button onClick={() => handleCreateCategory(foundRestaurant)}>Create Category</button>
-        <button onClick={() => handleCreateType(categories)}>Create type</button>
+        <button onClick={() => handleCreateCategory(foundRestaurant)}>
+          Create Category
+        </button>
+        <button onClick={() => handleCreateType(categories)}>
+          Create type
+        </button>
         <Image src="/dashboard.png" width={1460} height={1544} alt="back" />
       </div>
     </>
